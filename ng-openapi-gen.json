@@ -1,0 +1,4 @@
+{
+  "input":  "src/app/openapi/swagger.json",     
+  "output": "src/app/openapi/api"         
+}

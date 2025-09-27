@@ -1,0 +1,3434 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "api.ateb",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Usuarios/GetAllUsers": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "GetAllUsers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuarios/GetUserByEmail": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "GetUserByEmail",
+        "parameters": [
+          {
+            "name": "correo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuarios/CrearUsuario": {
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "CrearUsuario",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuarios/ActualizarUsuario": {
+      "put": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "ActualizarUsuario",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuarios/EliminarCliente": {
+      "delete": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "EliminarCliente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Accione": {
+        "type": "object",
+        "properties": {
+          "codAccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "seccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfils": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Perfile"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Bitacora": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroRegistro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaYhoraEvento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioResponsable": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcionEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "identificacionEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "tipoEventoNavigation": {
+            "$ref": "#/components/schemas/CTipoEvento"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CCaracter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoCaracter": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Documento"
+            },
+            "nullable": true
+          },
+          "planta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Plantum"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CClaveProducto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "claveProducto": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "dictamenes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dictamene"
+            },
+            "nullable": true
+          },
+          "documentoProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoProducto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CClaveSubproducto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "claveSubProducto": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentoProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoProducto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CEstadoTanque": {
+        "type": "object",
+        "properties": {
+          "estadoTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tanque"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CTipo": {
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresaImpExps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaImpExp"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CTipoEvento": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "tipoEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "bitacoras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bitacora"
+            },
+            "nullable": true
+          },
+          "documentoBitacoras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoBitacora"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CTipoImpExp": {
+        "type": "object",
+        "properties": {
+          "tipoDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoImportacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresaImpExps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaImpExp"
+            },
+            "nullable": true
+          },
+          "tipoDocumentoNavigation": {
+            "$ref": "#/components/schemas/TipoDocumento"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CertificadosProveedore": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroFolioCertificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcCertificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaEmisionCertificado": {
+            "type": "string",
+            "format": "date"
+          },
+          "resultadoCertificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "adjuntoPdfcertificado": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "adjuntoXmlcertificado": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompAlmCertificado": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroFolioCertificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcCertificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaEmisionCertificado": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "resultadoCertificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompAlmCfdinacional": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoCfdi": {
+            "type": "string",
+            "nullable": true
+          },
+          "precioCompra": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "contraprestacion": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tarifaDeAlmacenamiento": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cargoPorCapacidadAlmac": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cargoPorUsoAlmac": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cargoVolumetricoAlmac": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "descuento": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fechaYhoraTransaccion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "valorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "um": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipoEs": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "aclaracion": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivoRecepcion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "proveedorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "permisoProveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcClienteOproveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreClienteOproveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "poderCalorifico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioUnitario": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "umNavigation": {
+            "$ref": "#/components/schemas/TClaveUnidadMedidum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompAlmCfdinacionalDocumento": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "xml": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "pdf": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "claveTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompAlmDictaman": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroFolioDictamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcDictamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "loteDictamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaEmisionDictamen": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "resultadoDictamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompAlmProveedorNacionalMensual": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "proveedorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "permisoProveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcClienteOproveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreClienteOproveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "documento": {
+            "$ref": "#/components/schemas/Documento"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearUsuarioDto": {
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearUsuarioDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "$ref": "#/components/schemas/CrearUsuarioDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dictamene": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroFolioDictamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcDictamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcRepresentanteLegalProveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcPersonal": {
+            "type": "string",
+            "nullable": true
+          },
+          "loteDictamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "idClaveProducto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaEmisionDictamen": {
+            "type": "string",
+            "format": "date"
+          },
+          "resultadoDictamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "adjuntoPdfdictamen": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "adjuntoXmldcitamen": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "idClaveProductoNavigation": {
+            "$ref": "#/components/schemas/CClaveProducto"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dispensario": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DispensariosManguera": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "identificadorManguera": {
+            "type": "string",
+            "nullable": true
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Documento": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "periodo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipoDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "versionCtrVol": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcProveedorInformatico": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoCaracter": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "modalidadPermiso": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numPermiso": {
+            "type": "string",
+            "nullable": true
+          },
+          "numContratoOasignacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "instalacionAlmacenGasNatural": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveInstalacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcionInstalacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroPozos": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroTanques": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroDuctosEntradaSalida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroDuctosTransporteDistribucion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroDispensarios": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechayHoraReporteMes": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechayHoraCorteDiario": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaGeneracion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "identificadorUnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "estatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "porcentajeCaptura": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreImportacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "compAlmProveedorNacionalMensual": {
+            "$ref": "#/components/schemas/CompAlmProveedorNacionalMensual"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "estatusNavigation": {
+            "$ref": "#/components/schemas/DocumentoEstatus"
+          },
+          "modalidadPermisoNavigation": {
+            "$ref": "#/components/schemas/TClavePermiso"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "tipoCaracterNavigation": {
+            "$ref": "#/components/schemas/CCaracter"
+          },
+          "tipoDocumentoNavigation": {
+            "$ref": "#/components/schemas/TipoDocumento"
+          },
+          "versionCtrVolNavigation": {
+            "$ref": "#/components/schemas/VersionControlVolumetrico"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoBitacora": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroRegistro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaYhoraEvento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioResponsable": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcionEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "identificacionEvento": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "tipoEventoNavigation": {
+            "$ref": "#/components/schemas/CTipoEvento"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoDiarioDispenEntrega": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveIdentificacionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveIdentificadorDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "identificadorManguera": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoDeRegistro": {
+            "type": "string",
+            "nullable": true
+          },
+          "volEntregadoTotalAcumValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volEntregadoTotalInstaValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioVentaTotalizadorInsta": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fechaYhoraEntrega": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoDiarioManguera": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "identificadorManguera": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoDiarioMedicionDispensario": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "claveDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "sistemaMedicionDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "localizOdescripSistMedicionDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigenciaCalibracionSistMedicionDispensario": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "incertidumbreMedicionSistMedicionDispensario": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoDispensario": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoEstatus": {
+        "type": "object",
+        "properties": {
+          "estatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Documento"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoExistencium": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaActual": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaYhoraEstaMedicionMes": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "valorNumerico": {
+            "type": "number",
+            "format": "double"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoGasLp": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "composDePropanoEnGasLp": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "composDeButanoEnGasLp": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoGenerado": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "guid": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaGeneracion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "xml": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoMedicionTanque": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveIdentificacionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sistemaMedicionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "localizOdescripSistMedicionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigenciaCalibracionSistMedicionTanque": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "incertidumbreMedicionSistMedicionTanque": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoProducto": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveProducto": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "claveSubProducto": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "marcaComercial": {
+            "type": "string",
+            "nullable": true
+          },
+          "marcaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "concentracionSustanciaMarcaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "um": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "claveProductoNavigation": {
+            "$ref": "#/components/schemas/CClaveProducto"
+          },
+          "claveSubProductoNavigation": {
+            "$ref": "#/components/schemas/CClaveSubproducto"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "producto": {
+            "$ref": "#/components/schemas/Producto"
+          },
+          "umNavigation": {
+            "$ref": "#/components/schemas/TClaveUnidadMedidum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoTanque": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveIdentificacionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "localizacionYodescripcionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigenciaCalibracionTanque": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "capTotalValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "capOperativaValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "capUtilValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "capFondajeValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "capGasTalonValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volMinOperaValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "um": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "estadoTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "umNavigation": {
+            "$ref": "#/components/schemas/TClaveUnidadMedidum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentoTanqueExistencium": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveIdentificacionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "volumenExistenciasAnterior": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volumenAcumOpsRecepcion": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volumenvolumenAcumOpsEntrega": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volumenExistencias": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "horaRecepcionAcumulado": {
+            "type": "string",
+            "format": "time",
+            "nullable": true
+          },
+          "horaEntregaAcumulado": {
+            "type": "string",
+            "format": "time",
+            "nullable": true
+          },
+          "fechayHoraEstaMedicion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechayHoraMedicionAnterior": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "um": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Empresa": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfc": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcRepresentanteLegal": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "versionCtrVol": {
+            "type": "string",
+            "nullable": true
+          },
+          "activa": {
+            "type": "boolean"
+          },
+          "bitacoras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bitacora"
+            },
+            "nullable": true
+          },
+          "certificadosProveedores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CertificadosProveedore"
+            },
+            "nullable": true
+          },
+          "compAlmCertificados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmCertificado"
+            },
+            "nullable": true
+          },
+          "compAlmCfdinacionalDocumentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmCfdinacionalDocumento"
+            },
+            "nullable": true
+          },
+          "compAlmCfdinacionals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmCfdinacional"
+            },
+            "nullable": true
+          },
+          "compAlmDictamen": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmDictaman"
+            },
+            "nullable": true
+          },
+          "compAlmProveedorNacionalMensuals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmProveedorNacionalMensual"
+            },
+            "nullable": true
+          },
+          "dictamenes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dictamene"
+            },
+            "nullable": true
+          },
+          "documentoBitacoras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoBitacora"
+            },
+            "nullable": true
+          },
+          "documentoDiarioDispenEntregas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoDiarioDispenEntrega"
+            },
+            "nullable": true
+          },
+          "documentoDiarioMangueras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoDiarioManguera"
+            },
+            "nullable": true
+          },
+          "documentoDiarioMedicionDispensarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoDiarioMedicionDispensario"
+            },
+            "nullable": true
+          },
+          "documentoDispensarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoDispensario"
+            },
+            "nullable": true
+          },
+          "documentoExistencia": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoExistencium"
+            },
+            "nullable": true
+          },
+          "documentoGasLps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoGasLp"
+            },
+            "nullable": true
+          },
+          "documentoGenerados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoGenerado"
+            },
+            "nullable": true
+          },
+          "documentoMedicionTanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoMedicionTanque"
+            },
+            "nullable": true
+          },
+          "documentoProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoProducto"
+            },
+            "nullable": true
+          },
+          "documentoTanqueExistencia": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoTanqueExistencium"
+            },
+            "nullable": true
+          },
+          "documentoTanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoTanque"
+            },
+            "nullable": true
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Documento"
+            },
+            "nullable": true
+          },
+          "empresaImpExps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaImpExp"
+            },
+            "nullable": true
+          },
+          "empresaProveedors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaProveedor"
+            },
+            "nullable": true
+          },
+          "entregaDiarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntregaDiario"
+            },
+            "nullable": true
+          },
+          "entregasMensuales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntregasMensuale"
+            },
+            "nullable": true
+          },
+          "perfilEmpresas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerfilEmpresa"
+            },
+            "nullable": true
+          },
+          "recepcionDiarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecepcionDiario"
+            },
+            "nullable": true
+          },
+          "recepcionesMensuales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecepcionesMensuale"
+            },
+            "nullable": true
+          },
+          "versionCtrVolNavigation": {
+            "$ref": "#/components/schemas/VersionControlVolumetrico"
+          },
+          "planta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Plantum"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmpresaImpExp": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoLayout": {
+            "type": "string",
+            "nullable": true
+          },
+          "ruta": {
+            "type": "string",
+            "nullable": true
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "tipoDocumentoNavigation": {
+            "$ref": "#/components/schemas/CTipoImpExp"
+          },
+          "tipoNavigation": {
+            "$ref": "#/components/schemas/CTipo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmpresaProducto": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "disponibilidad": {
+            "type": "boolean"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "producto": {
+            "$ref": "#/components/schemas/Producto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmpresaProveedor": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "proveedorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "disponibilidad": {
+            "type": "boolean"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "proveedor": {
+            "$ref": "#/components/schemas/Proveedore"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntregaDiario": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveIdentificacionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "numerDeRegistro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "volInicialTanqueValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volFinalTanqueValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volEntregaValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "temperatura": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "presionAbsoluta": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fechaYhoraInicioEntrega": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaYhoraFinalEntrega": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isDucto": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntregasMensuale": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalEntregasMes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sumaVolEntregadoMesValorNumerico": {
+            "type": "number",
+            "format": "double"
+          },
+          "sumaVolEntregadoMesUm": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDocumentosMes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "importeTotalEntregasMensual": {
+            "type": "number",
+            "format": "double"
+          },
+          "poderCalorifico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "poderCalorificoUm": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "sumaVolEntregadoMesUmNavigation": {
+            "$ref": "#/components/schemas/TClaveUnidadMedidum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GasLp": {
+        "type": "object",
+        "properties": {
+          "productoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "composDePropanoEnGasLp": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "composDeButanoEnGasLp": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "producto": {
+            "$ref": "#/components/schemas/Producto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HistoryPass": {
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "hashPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuario": {
+            "$ref": "#/components/schemas/Usuario"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicionDispensario": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sistemaMedicionDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "localizOdescripSistMedicionDispensario": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigenciaCalibracionSistMedicionDispensario": {
+            "type": "string",
+            "format": "date"
+          },
+          "incertidumbreMedicionSistMedicionDispensario": {
+            "type": "number",
+            "format": "double"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicionTanque": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveIdentificacionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "consecutivo": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sistemaMedicionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "localizOdescripSistMedicionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigenciaCalibracionSistMedicionTanque": {
+            "type": "string",
+            "format": "date"
+          },
+          "incertidumbreMedicionSistMedicionTanque": {
+            "type": "number",
+            "format": "double"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "tanque": {
+            "$ref": "#/components/schemas/Tanque"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PerfilEmpresa": {
+        "type": "object",
+        "properties": {
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "perfil": {
+            "$ref": "#/components/schemas/Perfile"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Perfile": {
+        "type": "object",
+        "properties": {
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "perfil": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "acciones": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfilEmpresas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerfilEmpresa"
+            },
+            "nullable": true
+          },
+          "usuarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Usuario"
+            },
+            "nullable": true
+          },
+          "codAccions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Accione"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlantaProducto": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "disponibilidad": {
+            "type": "boolean"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "producto": {
+            "$ref": "#/components/schemas/Producto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Plantum": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcionPlanta": {
+            "type": "string",
+            "nullable": true
+          },
+          "idTipoCaracter": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idModalidadPermiso": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numPermiso": {
+            "type": "string",
+            "nullable": true
+          },
+          "numContratoOasignacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "instalacionAlmacenGasNatural": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveInstalacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcionInstalacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroPozos": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroTanques": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroDuctosEntradaSalida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroDuctosTransporteDistribucion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroDispensarios": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "activa": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "bitacoras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bitacora"
+            },
+            "nullable": true
+          },
+          "compAlmCertificados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmCertificado"
+            },
+            "nullable": true
+          },
+          "compAlmCfdinacionalDocumentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmCfdinacionalDocumento"
+            },
+            "nullable": true
+          },
+          "compAlmCfdinacionals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmCfdinacional"
+            },
+            "nullable": true
+          },
+          "compAlmDictamen": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmDictaman"
+            },
+            "nullable": true
+          },
+          "compAlmProveedorNacionalMensuals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmProveedorNacionalMensual"
+            },
+            "nullable": true
+          },
+          "dictamenes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dictamene"
+            },
+            "nullable": true
+          },
+          "dispensarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dispensario"
+            },
+            "nullable": true
+          },
+          "dispensariosMangueras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DispensariosManguera"
+            },
+            "nullable": true
+          },
+          "documentoBitacoras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoBitacora"
+            },
+            "nullable": true
+          },
+          "documentoDiarioDispenEntregas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoDiarioDispenEntrega"
+            },
+            "nullable": true
+          },
+          "documentoDiarioMangueras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoDiarioManguera"
+            },
+            "nullable": true
+          },
+          "documentoDiarioMedicionDispensarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoDiarioMedicionDispensario"
+            },
+            "nullable": true
+          },
+          "documentoDispensarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoDispensario"
+            },
+            "nullable": true
+          },
+          "documentoExistencia": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoExistencium"
+            },
+            "nullable": true
+          },
+          "documentoGasLps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoGasLp"
+            },
+            "nullable": true
+          },
+          "documentoGenerados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoGenerado"
+            },
+            "nullable": true
+          },
+          "documentoMedicionTanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoMedicionTanque"
+            },
+            "nullable": true
+          },
+          "documentoProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoProducto"
+            },
+            "nullable": true
+          },
+          "documentoTanqueExistencia": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoTanqueExistencium"
+            },
+            "nullable": true
+          },
+          "documentoTanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoTanque"
+            },
+            "nullable": true
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Documento"
+            },
+            "nullable": true
+          },
+          "empresaProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaProducto"
+            },
+            "nullable": true
+          },
+          "entregaDiarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntregaDiario"
+            },
+            "nullable": true
+          },
+          "entregasMensuales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntregasMensuale"
+            },
+            "nullable": true
+          },
+          "idModalidadPermisoNavigation": {
+            "$ref": "#/components/schemas/TClavePermiso"
+          },
+          "idTipoCaracterNavigation": {
+            "$ref": "#/components/schemas/CCaracter"
+          },
+          "medicionDispensarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MedicionDispensario"
+            },
+            "nullable": true
+          },
+          "medicionTanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MedicionTanque"
+            },
+            "nullable": true
+          },
+          "perfilEmpresas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerfilEmpresa"
+            },
+            "nullable": true
+          },
+          "plantaProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlantaProducto"
+            },
+            "nullable": true
+          },
+          "recepcionDiarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecepcionDiario"
+            },
+            "nullable": true
+          },
+          "recepcionesMensuales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecepcionesMensuale"
+            },
+            "nullable": true
+          },
+          "tanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tanque"
+            },
+            "nullable": true
+          },
+          "empresas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Empresa"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Producto": {
+        "type": "object",
+        "properties": {
+          "productoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "idClaveProducto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idClaveSubProducto": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "marcaComercial": {
+            "type": "string",
+            "nullable": true
+          },
+          "marcaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "concentracionSustanciaMarcaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "idUm": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activo": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "documentoProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoProducto"
+            },
+            "nullable": true
+          },
+          "empresaProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaProducto"
+            },
+            "nullable": true
+          },
+          "gasLp": {
+            "$ref": "#/components/schemas/GasLp"
+          },
+          "plantaProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlantaProducto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Proveedore": {
+        "type": "object",
+        "properties": {
+          "noProveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcP": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocialP": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoP": {
+            "type": "string",
+            "nullable": true
+          },
+          "numPermiso": {
+            "type": "string",
+            "nullable": true
+          },
+          "activo": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "empresaProveedors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaProveedor"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecepcionDiario": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveIdentificacionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "numerDeRegistro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "volInicialTanqueValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volFinalTanqueValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volRecepValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "temperatura": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "presionAbsoluta": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fechaYhoraInicioRecepcion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaYhoraFinalRecepcion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isDucto": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecepcionesMensuale": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "noDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalRecepcionesMes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sumaVolRecepMesValorNumerico": {
+            "type": "number",
+            "format": "double"
+          },
+          "sumaVolRecepMesUm": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDocumentosMes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "importeTotalRecepcionesMensual": {
+            "type": "number",
+            "format": "double"
+          },
+          "poderCalorifico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "poderCalorificoUm": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "sumaVolRecepMesUmNavigation": {
+            "$ref": "#/components/schemas/TClaveUnidadMedidum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TClavePermiso": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modalidadPermiso": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Documento"
+            },
+            "nullable": true
+          },
+          "planta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Plantum"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TClaveUnidadMedidum": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "claveUnidadMedida": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "compAlmCfdinacionals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompAlmCfdinacional"
+            },
+            "nullable": true
+          },
+          "documentoProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoProducto"
+            },
+            "nullable": true
+          },
+          "documentoTanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoTanque"
+            },
+            "nullable": true
+          },
+          "entregasMensuales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntregasMensuale"
+            },
+            "nullable": true
+          },
+          "recepcionesMensuales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecepcionesMensuale"
+            },
+            "nullable": true
+          },
+          "tanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tanque"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Tanque": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "claveIdentificacionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "localizacionYodescripcionTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigenciaCalibracionTanque": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "capTotalValorNumerico": {
+            "type": "number",
+            "format": "double"
+          },
+          "capOperativaValorNumerico": {
+            "type": "number",
+            "format": "double"
+          },
+          "capUtilValorNumerico": {
+            "type": "number",
+            "format": "double"
+          },
+          "capFondajeValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "capGasTalonValorNumerico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volMinOperaValorNumrico": {
+            "type": "number",
+            "format": "double"
+          },
+          "estadoTanque": {
+            "type": "string",
+            "nullable": true
+          },
+          "um": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoTanqueNavigation": {
+            "$ref": "#/components/schemas/CEstadoTanque"
+          },
+          "medicionTanques": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MedicionTanque"
+            },
+            "nullable": true
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
+          },
+          "umNavigation": {
+            "$ref": "#/components/schemas/TClaveUnidadMedidum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoDocumento": {
+        "type": "object",
+        "properties": {
+          "tipoDocumento1": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "cTipoImpExp": {
+            "$ref": "#/components/schemas/CTipoImpExp"
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Documento"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "primeraVez": {
+            "type": "boolean"
+          },
+          "updatePassword": {
+            "type": "string",
+            "format": "date"
+          },
+          "historyPasses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoryPass"
+            },
+            "nullable": true
+          },
+          "perfil": {
+            "$ref": "#/components/schemas/Perfile"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsuarioDto": {
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "primeraVez": {
+            "type": "boolean"
+          },
+          "updatePassword": {
+            "type": "string",
+            "format": "date"
+          },
+          "historyPasses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoryPass"
+            },
+            "nullable": true
+          },
+          "perfil": {
+            "$ref": "#/components/schemas/Perfile"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsuarioDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsuarioDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VersionControlVolumetrico": {
+        "type": "object",
+        "properties": {
+          "versionCtrVol": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Documento"
+            },
+            "nullable": true
+          },
+          "empresas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Empresa"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Ingrese el token JWT en este formato: Bearer {token}",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

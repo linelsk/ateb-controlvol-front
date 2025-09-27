@@ -1,0 +1,23 @@
+<div class="login-bg">
+  <div class="login-card">
+    <div class="login-avatar">
+      <mat-icon class="avatar-icon" style="font-size:2.5rem;line-height:64px;">person</mat-icon>
+    </div>
+    <h2 class="login-title">Bienvenido</h2>
+    <p class="login-subtitle">Accede a tu cuenta</p>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Correo Electrónico</mat-label>
+        <input matInput type="email" formControlName="correo" autocomplete="email" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+        <button mat-icon-button matSuffix type="button" (click)="hide = !hide" tabindex="-1">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="full-width login-btn" type="submit" [disabled]="!loginForm.valid">Entrar</button>
+    </form>
+  </div>
+</div>

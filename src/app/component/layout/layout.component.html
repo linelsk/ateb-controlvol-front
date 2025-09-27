@@ -1,0 +1,19 @@
+<div class="layout">
+	<aside class="sidebar">
+		<div class="sidebar-title">Bienvenido, {{ role }}</div>
+		<div class="sidebar-username">
+			{{ username }}
+		</div>
+		<nav class="menu-list">
+			<!-- Botón de logout visualmente igual a los links -->
+			<a class="menu-item logout-btn" href="#" (click)="logout(); $event.preventDefault()">
+				<span class="menu-icon">&#x1F511;</span>
+				<span class="menu-text">Cerrar sesión</span>
+			</a>
+		</nav>
+	</aside>
+	<main class="main-content">
+		<!-- Aquí va el contenido principal -->
+        <router-outlet></router-outlet>
+	</main>
+</div>

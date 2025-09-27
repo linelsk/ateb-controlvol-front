@@ -1,0 +1,94 @@
+.home-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.user-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.user-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.user-details {
+  margin: 1rem 0;
+}
+
+.user-details p {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.status-active {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.status-inactive {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.first-time {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.features {
+  margin-top: 1rem;
+}
+
+.features h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.features ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.features li {
+  padding: 0.5rem 0;
+  color: #666;
+}
+
+.features li:before {
+  content: "✓ ";
+  color: #4caf50;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+mat-card-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+[mat-card-avatar] {
+  background: #667eea;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

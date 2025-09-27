@@ -1,0 +1,124 @@
+/* Aquí van los estilos del login, incluyendo media queries para responsividad */
+.login-bg {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #23232b 0%, #3f51b5 100%);
+  animation: bgfade 1.2s cubic-bezier(.4,0,.2,1);
+}
+@keyframes bgfade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.login-card {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(63,81,181,0.18), 0 1.5px 8px 0 rgba(0,0,0,0.08);
+  padding: 2.5rem 2.2rem 2rem 2.2rem;
+  min-width: 340px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  animation: cardfade 0.8s cubic-bezier(.4,0,.2,1);
+}
+@keyframes cardfade {
+  from { transform: translateY(40px) scale(0.98); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.login-avatar {
+  background: linear-gradient(135deg, #3f51b5 60%, #7c3aed 100%);
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 8px 0 rgba(63,81,181,0.18);
+  overflow: hidden;
+}
+.avatar-icon {
+  color: #fff;
+  font-size: 2.5rem !important;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 64px !important;
+  text-align: center;
+}
+.login-title {
+  color: #23232b;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+.login-subtitle {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+}
+.full-width {
+  width: 100%;
+}
+mat-form-field {
+  background: transparent;
+}
+.login-btn {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 8px 0 rgba(63,81,181,0.10);
+  transition: box-shadow 0.2s;
+}
+.login-btn:hover {
+  box-shadow: 0 4px 16px 0 rgba(63,81,181,0.18);
+}
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+@media (max-width: 600px) {
+  .login-card {
+    min-width: 90vw;
+    padding: 1.5rem 0.7rem 1.2rem 0.7rem;
+    border-radius: 1rem;
+    gap: 1rem;
+  }
+  .login-title {
+    font-size: 1.2rem;
+  }
+  .login-avatar {
+    width: 48px;
+    height: 48px;
+  }
+  .avatar-icon {
+    font-size: 1.5rem;
+  }
+  form {
+    gap: 0.8rem;
+  }
+}
+@media (max-width: 400px) {
+  .login-card {
+    min-width: 98vw;
+    padding: 1rem 0.2rem 1rem 0.2rem;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .login-card {
+    min-width: 340px;
+    max-width: 420px;
+    padding: 2rem 1.2rem 1.5rem 1.2rem;
+  }
+}
