@@ -1,0 +1,286 @@
+<!-- Contenedor principal -->
+<div class="page-container">
+  
+  <!-- Encabezado con información del catálogo -->
+  <div class="content-section">
+    <mat-card class="card-gradient">
+      <mat-card-header>
+        <mat-card-title class="card-title-with-icon">
+          <mat-icon>people</mat-icon>
+          Catálogo de Usuarios
+        </mat-card-title>
+        <mat-card-subtitle>
+          Administración y gestión de usuarios del sistema
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+  <!-- Barra de herramientas -->
+  <div class="content-section">
+    <mat-card class="card-standard">
+      <div class="toolbar-content">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Buscar usuario</mat-label>
+          <input matInput 
+                 [(ngModel)]="searchTerm"
+                 (input)="applyFilter()"
+                 placeholder="Nombre, correo o perfil..."
+                 autocomplete="off">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <button mat-raised-button 
+                color="primary" 
+                (click)="showNewForm()"
+                class="action-button">
+          <mat-icon>add</mat-icon>
+          Nuevo Usuario
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- Formulario para crear/editar usuario -->
+  @if (showForm) {
+    <div class="content-section">
+    <mat-card class="card-accent">
+      <mat-card-header>
+        <mat-card-title>
+          {{ isEditing ? 'Editar Usuario' : 'Nuevo Usuario' }}
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="field-half">
+              <mat-label>Nombre completo</mat-label>
+              <input matInput 
+                     formControlName="nombre"
+                     placeholder="Nombre completo del usuario"
+                     autocomplete="off">
+              @if (nombre?.hasError('required')) {
+                <mat-error>
+                  El nombre es requerido
+                </mat-error>
+              }
+              @if (nombre?.hasError('maxlength')) {
+                <mat-error>
+                  El nombre no puede exceder 255 caracteres
+                </mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="field-half">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput 
+                     formControlName="correo"
+                     type="email"
+                     placeholder="usuario@ejemplo.com"
+                     autocomplete="off">
+              @if (correo?.hasError('required')) {
+                <mat-error>
+                  El correo es requerido
+                </mat-error>
+              }
+              @if (correo?.hasError('email')) {
+                <mat-error>
+                  Formato de correo inválido
+                </mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="field-half">
+              <mat-label>Contraseña</mat-label>
+              <input matInput 
+                     formControlName="password"
+                     type="password"
+                     placeholder="Contraseña del usuario"
+                     autocomplete="new-password">
+              @if (password?.hasError('required')) {
+                <mat-error>
+                  La contraseña es requerida
+                </mat-error>
+              }
+              @if (password?.hasError('minlength')) {
+                <mat-error>
+                  La contraseña debe tener al menos 6 caracteres
+                </mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="field-half">
+              <mat-label>Perfil de Usuario</mat-label>
+              <mat-select formControlName="perfilId">
+                <mat-option [value]="1">Administrador</mat-option>
+                <mat-option [value]="2">Usuario</mat-option>
+                <mat-option [value]="3">Solo Lectura</mat-option>
+              </mat-select>
+              @if (perfilId?.hasError('required')) {
+                <mat-error>
+                  El perfil es requerido
+                </mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <div class="field-half toggle-container">
+              <mat-slide-toggle formControlName="activo" color="primary">
+                <span class="toggle-label">Usuario Activo</span>
+              </mat-slide-toggle>
+            </div>
+
+            <mat-form-field appearance="outline" class="field-half">
+              <mat-label>Plantas Asignadas</mat-label>
+              <mat-select formControlName="plantasIds" multiple>
+                @for (planta of plantas; track planta.plantaId) {
+                  <mat-option [value]="planta.plantaId">
+                    {{ planta.descripcionPlanta }}
+                  </mat-option>
+                }
+              </mat-select>
+              <mat-hint>Seleccione una o más plantas para el usuario</mat-hint>
+            </mat-form-field>
+          </div>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions class="form-actions">
+        <button mat-button 
+                type="button" 
+                (click)="cancelForm()"
+                class="btn-cancel">
+          <mat-icon>cancel</mat-icon>
+          Cancelar
+        </button>
+        
+        <button mat-raised-button 
+                color="primary"
+                (click)="onSubmit()"
+                [disabled]="usuarioForm.invalid"
+                class="btn-primary">
+          <mat-icon>{{ isEditing ? 'save' : 'add' }}</mat-icon>
+          {{ isEditing ? 'Actualizar' : 'Crear' }} Usuario
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  }
+
+  <!-- Tabla de usuarios -->
+  <div class="content-section">
+    <mat-card class="card-standard">
+      <mat-card-header>
+        <mat-card-title>Lista de Usuarios</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="table-container">
+          @if (loading) {
+            <div class="loading-state">
+              <mat-icon class="loading-icon">refresh</mat-icon>
+              <h3>Cargando usuarios...</h3>
+              <p>Por favor espere mientras se cargan los datos</p>
+            </div>
+          } @else if (dataSource.data.length === 0) {
+            <div class="empty-state">
+              <mat-icon>people_outline</mat-icon>
+              <h3>No hay usuarios registrados</h3>
+              <p>Comienza agregando el primer usuario al sistema</p>
+            </div>
+          } @else {
+            <div>
+              <table mat-table [dataSource]="dataSource" class="data-table" matSort>
+              
+              <!-- Columna Nombre -->
+              <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+                <td mat-cell *matCellDef="let usuario">
+                  <div class="info-group">
+                    <span class="info-primary">{{ usuario.nombre }}</span>
+                    <span class="info-secondary">ID: {{ usuario.usuarioId }}</span>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Columna Correo -->
+              <ng-container matColumnDef="correo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+                <td mat-cell *matCellDef="let usuario">
+                  <span class="code-text">{{ usuario.correo }}</span>
+                </td>
+              </ng-container>
+
+              <!-- Columna Perfil -->
+              <ng-container matColumnDef="perfil">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Perfil</th>
+                <td mat-cell *matCellDef="let usuario">
+                  <span class="info-primary">{{ usuario.perfil?.perfil || 'Sin perfil' }}</span>
+                </td>
+              </ng-container>
+
+              <!-- Columna Estado Activo -->
+              <ng-container matColumnDef="activo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                <td mat-cell *matCellDef="let usuario">
+                  <span class="status-badge" 
+                        [ngClass]="usuario.activo ? 'status-active' : 'status-inactive'">
+                    <mat-icon class="status-icon">
+                      {{ usuario.activo ? 'check_circle' : 'cancel' }}
+                    </mat-icon>
+                    {{ usuario.activo ? 'Activo' : 'Inactivo' }}
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Columna Primera Vez -->
+              <ng-container matColumnDef="primeraVez">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Primera Vez</th>
+                <td mat-cell *matCellDef="let usuario">
+                  <span class="status-badge"
+                        [ngClass]="usuario.primeraVez ? 'status-pending' : 'status-active'">
+                    <mat-icon class="status-icon">
+                      {{ usuario.primeraVez ? 'new_releases' : 'verified' }}
+                    </mat-icon>
+                    {{ usuario.primeraVez ? 'Sí' : 'No' }}
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Columna Acciones -->
+              <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let usuario">
+                  <div class="actions-container">
+                    <button mat-icon-button 
+                            color="primary"
+                            (click)="editUsuario(usuario)"
+                            matTooltip="Editar usuario">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+                  class="usuario-row"></tr>
+              </table>
+
+              <!-- Paginador -->
+              <mat-paginator 
+                [pageSizeOptions]="pageSizeOptions"
+                [pageSize]="pageSize"
+                showFirstLastButtons>
+              </mat-paginator>
+            </div>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

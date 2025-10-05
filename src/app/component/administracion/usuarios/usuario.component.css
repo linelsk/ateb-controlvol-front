@@ -1,0 +1,161 @@
+/* Componente específico - Usuario */
+
+/* Tabla de usuarios - estilos específicos */
+.usuario-row {
+  transition: all 0.2s ease;
+}
+
+.usuario-row:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Información de usuario en la tabla */
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-primary {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.info-secondary {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Badge de estado para usuarios */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-icon {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.status-active {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.status-inactive {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #F44336;
+}
+
+.status-pending {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #FF9800;
+}
+
+/* Toggle para campo activo */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.toggle-label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Estilos para correos */
+.code-text {
+  font-family: 'Courier New', monospace;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--primary-color);
+}
+
+/* Estados específicos del componente */
+.loading-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.loading-icon {
+  font-size: 48px !important;
+  width: 48px !important;
+  height: 48px !important;
+  color: var(--primary-color);
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-state mat-icon {
+  font-size: 64px !important;
+  width: 64px !important;
+  height: 64px !important;
+  margin-bottom: 16px;
+  color: var(--border-color);
+}
+
+.empty-state h3 {
+  margin: 16px 0 8px 0;
+  color: var(--text-primary);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Responsive para usuarios */
+@media (max-width: 768px) {
+  .info-group {
+    min-width: 120px;
+  }
+  
+  .info-primary {
+    font-size: 13px;
+  }
+  
+  .info-secondary {
+    font-size: 11px;
+  }
+  
+  .status-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  
+  .code-text {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .usuario-row:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}

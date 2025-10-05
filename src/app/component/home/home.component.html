@@ -10,19 +10,23 @@
       </mat-card-header>
       
       <mat-card-content>
-        <div class="user-details" *ngIf="currentUser">
-          <p><strong>Usuario ID:</strong> {{ currentUser.usuarioId }}</p>
-          <p><strong>Correo:</strong> {{ currentUser.correo }}</p>
-          <p><strong>Perfil ID:</strong> {{ currentUser.perfilId }}</p>
-          <p><strong>Estado:</strong> 
-            <span [class]="currentUser.activo ? 'status-active' : 'status-inactive'">
-              {{ currentUser.activo ? 'Activo' : 'Inactivo' }}
-            </span>
-          </p>
-          <p *ngIf="currentUser.primeraVez"><strong>Primera vez:</strong> 
-            <span class="first-time">Sí - Considera cambiar tu contraseña</span>
-          </p>
-        </div>
+        @if (currentUser) {
+          <div class="user-details">
+            <p><strong>Usuario ID:</strong> {{ currentUser.usuarioId }}</p>
+            <p><strong>Correo:</strong> {{ currentUser.correo }}</p>
+            <p><strong>Perfil ID:</strong> {{ currentUser.perfilId }}</p>
+            <p><strong>Estado:</strong> 
+              <span [class]="currentUser.activo ? 'status-active' : 'status-inactive'">
+                {{ currentUser.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </p>
+            @if (currentUser.primeraVez) {
+              <p><strong>Primera vez:</strong> 
+                <span class="first-time">Sí - Considera cambiar tu contraseña</span>
+              </p>
+            }
+          </div>
+        }
       </mat-card-content>
       
       <mat-card-actions>
@@ -46,23 +50,27 @@
         <p>Has iniciado sesión exitosamente en el sistema.</p>
         <p>Tu sesión está activa y el token JWT se está enviando automáticamente en todas las peticiones.</p>
         
-        <div class="features" *ngIf="userRole === 'Administrador'">
-          <h3>Funcionalidades disponibles:</h3>
-          <ul>
-            <li>Gestión de usuarios</li>
-            <li>Configuración del sistema</li>
-            <li>Reportes administrativos</li>
-          </ul>
-        </div>
+        @if (userRole === 'Administrador') {
+          <div class="features">
+            <h3>Funcionalidades disponibles:</h3>
+            <ul>
+              <li>Gestión de usuarios</li>
+              <li>Configuración del sistema</li>
+              <li>Reportes administrativos</li>
+            </ul>
+          </div>
+        }
         
-        <div class="features" *ngIf="userRole !== 'Administrador'">
-          <h3>Funcionalidades disponibles:</h3>
-          <ul>
-            <li>Consulta de información</li>
-            <li>Generación de reportes</li>
-            <li>Actualización de perfil</li>
-          </ul>
-        </div>
+        @if (userRole !== 'Administrador') {
+          <div class="features">
+            <h3>Funcionalidades disponibles:</h3>
+            <ul>
+              <li>Consulta de información</li>
+              <li>Generación de reportes</li>
+              <li>Actualización de perfil</li>
+            </ul>
+          </div>
+        }
       </mat-card-content>
     </mat-card>
   </div>

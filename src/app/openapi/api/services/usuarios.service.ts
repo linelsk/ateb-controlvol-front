@@ -32,6 +32,10 @@ import { getUserByEmail$Json } from '../fn/usuarios/get-user-by-email-json';
 import { GetUserByEmail$Json$Params } from '../fn/usuarios/get-user-by-email-json';
 import { getUserByEmail$Plain } from '../fn/usuarios/get-user-by-email-plain';
 import { GetUserByEmail$Plain$Params } from '../fn/usuarios/get-user-by-email-plain';
+import { guardaRelacionUsuarioPlanta$Json } from '../fn/usuarios/guarda-relacion-usuario-planta-json';
+import { GuardaRelacionUsuarioPlanta$Json$Params } from '../fn/usuarios/guarda-relacion-usuario-planta-json';
+import { guardaRelacionUsuarioPlanta$Plain } from '../fn/usuarios/guarda-relacion-usuario-planta-plain';
+import { GuardaRelacionUsuarioPlanta$Plain$Params } from '../fn/usuarios/guarda-relacion-usuario-planta-plain';
 import { UsuarioDtoListApiResponse } from '../models/usuario-dto-list-api-response';
 
 @Injectable({ providedIn: 'root' })
@@ -272,6 +276,53 @@ export class UsuariosService extends BaseService {
   eliminarCliente$Json(params?: EliminarCliente$Json$Params, context?: HttpContext): Observable<CrearUsuarioDtoApiResponse> {
     return this.eliminarCliente$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<CrearUsuarioDtoApiResponse>): CrearUsuarioDtoApiResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `guardaRelacionUsuarioPlanta()` */
+  static readonly GuardaRelacionUsuarioPlantaPath = '/api/Usuarios/GuardaRelacionUsuarioPlanta';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `guardaRelacionUsuarioPlanta$Plain()` instead.
+   *
+   * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
+   */
+  guardaRelacionUsuarioPlanta$Plain$Response(params?: GuardaRelacionUsuarioPlanta$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return guardaRelacionUsuarioPlanta$Plain(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `guardaRelacionUsuarioPlanta$Plain$Response()` instead.
+   *
+   * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
+   */
+  guardaRelacionUsuarioPlanta$Plain(params?: GuardaRelacionUsuarioPlanta$Plain$Params, context?: HttpContext): Observable<boolean> {
+    return this.guardaRelacionUsuarioPlanta$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `guardaRelacionUsuarioPlanta$Json()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  guardaRelacionUsuarioPlanta$Json$Response(params?: GuardaRelacionUsuarioPlanta$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return guardaRelacionUsuarioPlanta$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `guardaRelacionUsuarioPlanta$Json$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  guardaRelacionUsuarioPlanta$Json(params?: GuardaRelacionUsuarioPlanta$Json$Params, context?: HttpContext): Observable<boolean> {
+    return this.guardaRelacionUsuarioPlanta$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
     );
   }
 

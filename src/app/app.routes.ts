@@ -20,8 +20,22 @@ export const routes: Routes = [
 				path: 'home',
 				loadComponent: () => import('./component/home/home.component').then(m => m.HomeComponent),
 				canActivate: [authGuard(['Cliente'])]
+			},
+			{
+				path: 'usuarios',
+				loadComponent: () => import('./component/administracion/usuarios/usuario.component').then(m => m.UsuarioComponent),
+				canActivate: [authGuard(['Administrador'])]
+			},
+			{
+				path: 'empresa',
+				loadComponent: () => import('./component/catalogos/empresa.component').then(m => m.EmpresaComponent),
+				canActivate: [authGuard(['Administrador'])]
+			},
+			{
+				path: 'perfil',
+				loadComponent: () => import('./component/administracion/perfil/perfil.component').then(m => m.PerfilComponent),
+				canActivate: [authGuard(['Administrador'])]
 			}
 		]
-	},
-	// Puedes agregar más rutas aquí
+	}
 ];

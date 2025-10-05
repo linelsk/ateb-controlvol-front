@@ -2,3 +2,497 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* ========================================
+   ESTILOS GLOBALES REUTILIZABLES
+   ======================================== */
+
+/* Variables CSS para consistencia */
+:root {
+  /* Colores primarios */
+  --primary-color: #667eea;
+  --primary-dark: #764ba2;
+  --primary-light: #eef2ff;
+  
+  /* Colores de estado */
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
+  
+  /* Colores de texto */
+  --text-primary: #334155;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  
+  /* Colores de fondo */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-muted: #f1f5f9;
+  
+  /* Colores de borde */
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-dark: #94a3b8;
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 20px rgba(102, 126, 234, 0.3);
+  --shadow-xl: 0 2px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Radios de borde */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-full: 25px;
+  
+  /* Espaciado */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+}
+
+/* ========================================
+   CONTENEDORES PRINCIPALES
+   ======================================== */
+
+.page-container {
+  padding: var(--spacing-lg);
+  background: var(--bg-secondary);
+  min-height: 100vh;
+}
+
+.content-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ========================================
+   TARJETAS (CARDS)
+   ======================================== */
+
+.card-gradient {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-gradient mat-card-header {
+  padding: var(--spacing-lg);
+}
+
+.card-gradient mat-card-title,
+.card-gradient mat-card-subtitle {
+  color: white;
+}
+
+.card-standard {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.card-accent {
+  border-radius: var(--spacing-lg);
+  box-shadow: var(--shadow-xl);
+  border-left: 4px solid var(--primary-color);
+}
+
+.card-title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+/* ========================================
+   BARRA DE HERRAMIENTAS
+   ======================================== */
+
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.search-field {
+  flex: 1;
+  min-width: 300px;
+}
+
+.action-button {
+  border-radius: var(--radius-full);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ========================================
+   FORMULARIOS
+   ======================================== */
+
+.form-row {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.field-full {
+  width: 100%;
+}
+
+.field-half {
+  flex: 1;
+  min-width: 250px;
+}
+
+.field-third {
+  flex: 1;
+  min-width: 200px;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md) 0;
+}
+
+.toggle-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--bg-muted);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.btn-cancel {
+  border-radius: var(--radius-xl);
+  color: var(--text-secondary);
+}
+
+.btn-primary {
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 600;
+}
+
+/* ========================================
+   TABLAS
+   ======================================== */
+
+.table-container {
+  margin-top: var(--spacing-md);
+  width: 100%;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.data-table {
+  width: 100%;
+  background: var(--bg-primary);
+}
+
+.data-table th {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.data-table tr {
+  transition: background-color 0.3s ease;
+}
+
+.data-table tr:hover {
+  background: var(--bg-muted);
+}
+
+/* ========================================
+   ESTADOS Y BADGES
+   ======================================== */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-xl);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ========================================
+   ELEMENTOS DE INFORMACIÓN
+   ======================================== */
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.info-primary {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.info-secondary {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.code-text {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: #3730a3;
+  background: var(--primary-light);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}
+
+.date-text {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ========================================
+   ACCIONES Y BOTONES
+   ======================================== */
+
+.actions-container {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+/* ========================================
+   ESTADOS VACÍOS Y CARGA
+   ======================================== */
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-2xl) var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+.empty-state mat-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+  color: var(--border-medium);
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-state h3 {
+  margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+  color: var(--text-secondary);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.loading-state {
+  text-align: center;
+  padding: var(--spacing-2xl) var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+.loading-icon {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ========================================
+   PAGINADOR
+   ======================================== */
+
+.mat-mdc-paginator {
+  background-color: transparent;
+  border-top: 1px solid var(--border-light);
+  margin-top: var(--spacing-md);
+}
+
+.mat-mdc-paginator .mat-mdc-select-value,
+.mat-mdc-paginator .mat-mdc-paginator-page-size-label,
+.mat-mdc-paginator .mat-mdc-paginator-range-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.mat-mdc-paginator .mat-mdc-paginator-page-size-label {
+  margin: 0 4px;
+}
+
+.mat-mdc-paginator .mat-mdc-paginator-range-label {
+  margin: 0 32px 0 24px;
+}
+
+.mat-mdc-paginator .mat-mdc-icon-button {
+  width: 40px;
+  height: 40px;
+}
+
+.mat-mdc-paginator .mat-mdc-icon-button[disabled] {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+/* ========================================
+   SNACKBARS
+   ======================================== */
+
+.snack-success {
+  background: var(--success-color) !important;
+  color: white !important;
+}
+
+.snack-error {
+  background: var(--error-color) !important;
+  color: white !important;
+}
+
+.snack-warning {
+  background: var(--warning-color) !important;
+  color: white !important;
+}
+
+.snack-info {
+  background: var(--info-color) !important;
+  color: white !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: var(--spacing-md);
+  }
+  
+  .toolbar-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-field {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .action-button {
+    width: 100%;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .field-half,
+  .field-third {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-cancel,
+  .btn-primary {
+    width: 100%;
+  }
+  
+  .data-table {
+    font-size: 0.875rem;
+  }
+  
+  .actions-container {
+    flex-direction: column;
+  }
+  
+  /* Responsive para el paginador */
+  .mat-mdc-paginator {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .mat-mdc-paginator .mat-mdc-paginator-page-size {
+    margin-bottom: 8px;
+  }
+  
+  .mat-mdc-paginator .mat-mdc-paginator-range-actions {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-gradient mat-card-header {
+    padding: var(--spacing-md);
+  }
+  
+  .card-gradient mat-card-title {
+    font-size: 1.25rem;
+  }
+  
+  .toolbar-content {
+    padding: 0.75rem;
+  }
+  
+  .empty-state mat-icon {
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+  }
+}
