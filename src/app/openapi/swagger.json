@@ -36,6 +36,821 @@
         }
       }
     },
+    "/api/Empresa/CrearEmpresa": {
+      "post": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "CrearEmpresa",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEmpresaDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEmpresaDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEmpresaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearEmpresaDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearEmpresaDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearEmpresaDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresa/ActualizarEmpresa": {
+      "post": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "ActualizarEmpresa",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEmpresaDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEmpresaDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearEmpresaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearEmpresaDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearEmpresaDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearEmpresaDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresa/GetEmpresaByEmpresa": {
+      "get": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "GetEmpresaByEmpresa",
+        "parameters": [
+          {
+            "name": "empresaId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaEmpresasDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaEmpresasDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaEmpresasDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresa/GetAllEmpresas": {
+      "get": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "GetAllEmpresas",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaEmpresasDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaEmpresasDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaEmpresasDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresa/GetEmpresaPlanta": {
+      "get": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "GetEmpresaPlanta",
+        "parameters": [
+          {
+            "name": "empresa",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaPlantaDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaPlantaDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaPlantaDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresa/GetAllPlantas": {
+      "get": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "GetAllPlantas",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaPlantaDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaPlantaDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaPlantaDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresa/GuardaRelacionEmpresaPlanta": {
+      "post": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "GuardaRelacionEmpresaPlanta",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearEmpresaPlantaDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearEmpresaPlantaDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearEmpresaPlantaDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresa/GetAllProveedores": {
+      "get": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "GetAllProveedores",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaProveedoresDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaProveedoresDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaProveedoresDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresa/GetEmpresaProveedores": {
+      "get": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "GetEmpresaProveedores",
+        "parameters": [
+          {
+            "name": "empresa",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaProveedorDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaProveedorDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmpresaProveedorDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresa/GuardaRelacionEmpresaProveedor": {
+      "post": {
+        "tags": [
+          "Empresa"
+        ],
+        "operationId": "GuardaRelacionEmpresaProveedor",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearEmpresaProveedorDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearEmpresaProveedorDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearEmpresaProveedorDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Perfil/CrearPerfil": {
+      "post": {
+        "tags": [
+          "Perfil"
+        ],
+        "operationId": "CrearPerfil",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPerfilDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPerfilDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPerfilDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearPerfilDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearPerfilDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearPerfilDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Perfil/ActualizarPerfil": {
+      "post": {
+        "tags": [
+          "Perfil"
+        ],
+        "operationId": "ActualizarPerfil",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPerfilDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPerfilDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPerfilDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearPerfilDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearPerfilDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearPerfilDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Perfil/GetPerfilByPerfil": {
+      "get": {
+        "tags": [
+          "Perfil"
+        ],
+        "operationId": "GetPerfilByPerfil",
+        "parameters": [
+          {
+            "name": "perfilId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearPerfilDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearPerfilDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearPerfilDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Perfil/GetAllPerfiles": {
+      "get": {
+        "tags": [
+          "Perfil"
+        ],
+        "operationId": "GetAllPerfiles",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaPerfilesDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaPerfilesDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaPerfilesDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Perfil/GetPerfilEmpresas": {
+      "get": {
+        "tags": [
+          "Perfil"
+        ],
+        "operationId": "GetPerfilEmpresas",
+        "parameters": [
+          {
+            "name": "perfilId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilEmpresaDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilEmpresaDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilEmpresaDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Perfil/GuardaRelacionPerfilEmpresa": {
+      "post": {
+        "tags": [
+          "Perfil"
+        ],
+        "operationId": "GuardaRelacionPerfilEmpresa",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearPerfilEmpresaDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearPerfilEmpresaDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearPerfilEmpresaDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Perfil/GetAcciones": {
+      "get": {
+        "tags": [
+          "Perfil"
+        ],
+        "operationId": "GetAcciones",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaAccionDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaAccionDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaAccionDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Perfil/GetPerfilAccionesByPerfil": {
+      "get": {
+        "tags": [
+          "Perfil"
+        ],
+        "operationId": "GetPerfilAccionesByPerfil",
+        "parameters": [
+          {
+            "name": "perfilId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilAccionDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilAccionDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilAccionDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Perfil/GuardaRelacionPerfilAccion": {
+      "post": {
+        "tags": [
+          "Perfil"
+        ],
+        "operationId": "GuardaRelacionPerfilAccion",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearPerfilAccionDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearPerfilAccionDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearPerfilAccionDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Usuarios/GetAllUsers": {
       "get": {
         "tags": [
@@ -48,17 +863,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                  "$ref": "#/components/schemas/ListaUsuarioPlantaListApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                  "$ref": "#/components/schemas/ListaUsuarioPlantaListApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                  "$ref": "#/components/schemas/ListaUsuarioPlantaListApiResponse"
                 }
               }
             }
@@ -98,6 +913,45 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UsuarioDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuarios/GetUserByID": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "GetUserByID",
+        "parameters": [
+          {
+            "name": "usuarioID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsuarioDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsuarioDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsuarioDtoListApiResponse"
                 }
               }
             }
@@ -242,6 +1096,103 @@
         }
       }
     },
+    "/api/Usuarios/GetPlantasByUsuario": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "GetPlantasByUsuario",
+        "parameters": [
+          {
+            "name": "usuarioID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioPlantaDtoListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioPlantaDtoListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioPlantaDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuarios/GuardaRelacionUsuarioPlanta": {
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "GuardaRelacionUsuarioPlanta",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearUsuarioPlantaDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearUsuarioPlantaDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CrearUsuarioPlantaDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/WeatherForecast": {
       "get": {
         "tags": [
@@ -299,10 +1250,10 @@
             "type": "string",
             "nullable": true
           },
-          "perfils": {
+          "perfilAccions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Perfile"
+              "$ref": "#/components/schemas/PerfilAccion"
             },
             "nullable": true
           }
@@ -898,6 +1849,164 @@
         },
         "additionalProperties": false
       },
+      "CrearEmpresaDto": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfc": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcRepresentanteLegal": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "versionCtrVol": {
+            "type": "string",
+            "nullable": true
+          },
+          "activa": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearEmpresaDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "$ref": "#/components/schemas/CrearEmpresaDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearEmpresaPlantaDto": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearEmpresaProveedorDto": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "proveedorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "disponibilidad": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearPerfilAccionDto": {
+        "type": "object",
+        "properties": {
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "codAccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearPerfilDto": {
+        "type": "object",
+        "properties": {
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "perfil": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "acciones": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearPerfilDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "$ref": "#/components/schemas/CrearPerfilDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearPerfilEmpresaDto": {
+        "type": "object",
+        "properties": {
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CrearUsuarioDto": {
         "type": "object",
         "properties": {
@@ -939,6 +2048,44 @@
           },
           "result": {
             "$ref": "#/components/schemas/CrearUsuarioDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearUsuarioPlantaDto": {
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaDescripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearUsuarioPlantaDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrearUsuarioPlantaDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2016,6 +3163,13 @@
             },
             "nullable": true
           },
+          "empresaPlanta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaPlantum"
+            },
+            "nullable": true
+          },
           "empresaProveedors": {
             "type": "array",
             "items": {
@@ -2060,13 +3214,6 @@
           },
           "versionCtrVolNavigation": {
             "$ref": "#/components/schemas/VersionControlVolumetrico"
-          },
-          "planta": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Plantum"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2105,6 +3252,72 @@
           },
           "tipoNavigation": {
             "$ref": "#/components/schemas/CTipo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmpresaPlantaDto": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombrePlanta": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmpresaPlantaDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaPlantaDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmpresaPlantum": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Empresa"
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
           }
         },
         "additionalProperties": false
@@ -2151,6 +3364,48 @@
           },
           "proveedor": {
             "$ref": "#/components/schemas/Proveedore"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmpresaProveedorDto": {
+        "type": "object",
+        "properties": {
+          "proveedorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreProveedor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmpresaProveedorDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaProveedorDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2306,6 +3561,62 @@
         },
         "additionalProperties": false
       },
+      "GetUsuarioDto": {
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "primeraVez": {
+            "type": "boolean"
+          },
+          "updatePassword": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUsuarioDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetUsuarioDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "HistoryPass": {
         "type": "object",
         "properties": {
@@ -2327,6 +3638,312 @@
           },
           "usuario": {
             "$ref": "#/components/schemas/Usuario"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaAccionDto": {
+        "type": "object",
+        "properties": {
+          "codAccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "seccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaAccionDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListaAccionDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaEmpresasDto": {
+        "type": "object",
+        "properties": {
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfc": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcRepresentanteLegal": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "versionCtrVol": {
+            "type": "string",
+            "nullable": true
+          },
+          "activa": {
+            "type": "boolean"
+          },
+          "listaPlantas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "listaProveedores": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaEmpresasDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "$ref": "#/components/schemas/ListaEmpresasDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaEmpresasDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListaEmpresasDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaPerfilesDto": {
+        "type": "object",
+        "properties": {
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "perfil": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaPerfilesDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListaPerfilesDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaPlantaDto": {
+        "type": "object",
+        "properties": {
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcionPlanta": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaPlantaDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListaPlantaDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaProveedoresDto": {
+        "type": "object",
+        "properties": {
+          "noProveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfcP": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocialP": {
+            "type": "string",
+            "nullable": true
+          },
+          "numPermiso": {
+            "type": "string",
+            "nullable": true
+          },
+          "activo": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaProveedoresDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListaProveedoresDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaUsuarioPlanta": {
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "primeraVez": {
+            "type": "boolean"
+          },
+          "updatePassword": {
+            "type": "string",
+            "format": "date"
+          },
+          "listaPlantas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "perfilDescripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListaUsuarioPlantaListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListaUsuarioPlanta"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2422,6 +4039,68 @@
         },
         "additionalProperties": false
       },
+      "PerfilAccion": {
+        "type": "object",
+        "properties": {
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "codAccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "codAccionNavigation": {
+            "$ref": "#/components/schemas/Accione"
+          },
+          "perfil": {
+            "$ref": "#/components/schemas/Perfile"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PerfilAccionDto": {
+        "type": "object",
+        "properties": {
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "codAccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcionAccion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PerfilAccionDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerfilAccionDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PerfilEmpresa": {
         "type": "object",
         "properties": {
@@ -2449,6 +4128,44 @@
         },
         "additionalProperties": false
       },
+      "PerfilEmpresaDto": {
+        "type": "object",
+        "properties": {
+          "perfilId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "empresaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcionEmpresa": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PerfilEmpresaDtoListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerfilEmpresaDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Perfile": {
         "type": "object",
         "properties": {
@@ -2468,6 +4185,13 @@
             "type": "string",
             "nullable": true
           },
+          "perfilAccions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerfilAccion"
+            },
+            "nullable": true
+          },
           "perfilEmpresas": {
             "type": "array",
             "items": {
@@ -2479,13 +4203,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Usuario"
-            },
-            "nullable": true
-          },
-          "codAccions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Accione"
             },
             "nullable": true
           }
@@ -2739,6 +4456,13 @@
             },
             "nullable": true
           },
+          "empresaPlanta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmpresaPlantum"
+            },
+            "nullable": true
+          },
           "empresaProductos": {
             "type": "array",
             "items": {
@@ -2815,10 +4539,10 @@
             },
             "nullable": true
           },
-          "empresas": {
+          "usuarioPlanta": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Empresa"
+              "$ref": "#/components/schemas/UsuarioPlantum"
             },
             "nullable": true
           }
@@ -3332,13 +5056,6 @@
             "type": "string",
             "format": "date"
           },
-          "historyPasses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HistoryPass"
-            },
-            "nullable": true
-          },
           "perfil": {
             "$ref": "#/components/schemas/Perfile"
           }
@@ -3361,6 +5078,23 @@
               "$ref": "#/components/schemas/UsuarioDto"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsuarioPlantum": {
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "planta": {
+            "$ref": "#/components/schemas/Plantum"
           }
         },
         "additionalProperties": false

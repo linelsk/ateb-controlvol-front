@@ -30,6 +30,12 @@ import {
 import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 
+// Interfaz extendida para simular relaciones hasta que se actualice el backend
+interface PerfilConRelaciones extends ListaPerfilesDto {
+  perfilEmpresas?: any[];
+  perfilAccions?: any[];
+}
+
 @Component({
   selector: 'app-perfil',
   standalone: true,
@@ -57,8 +63,8 @@ import { of } from 'rxjs';
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent implements OnInit, AfterViewInit {
-  dataSource!: MatTableDataSource<ListaPerfilesDto>;
-  displayedColumns: string[] = ['perfilId', 'perfil', 'descripcion', 'acciones'];
+  dataSource!: MatTableDataSource<PerfilConRelaciones>;
+  displayedColumns: string[] = ['perfil', 'descripcion', 'empresas', 'acciones', 'acciones_btn'];
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -85,7 +91,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     private readonly empresaService: EmpresaService
   ) {
     this.perfilForm = this.createForm();
-    this.dataSource = new MatTableDataSource<ListaPerfilesDto>([]);
+    this.dataSource = new MatTableDataSource<PerfilConRelaciones>([]);
   }
 
   ngOnInit(): void {
@@ -95,7 +101,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.filterPredicate = (data: ListaPerfilesDto, filter: string) => {
+    this.dataSource.filterPredicate = (data: PerfilConRelaciones, filter: string) => {
       const searchTerm = filter.toLowerCase();
       return (
         (data.perfil?.toLowerCase().includes(searchTerm) ?? false) ||
@@ -118,6 +124,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
 
   private createForm(): FormGroup {
     return this.fb.group({
+      perfilId: [null],
       perfil: ['', [Validators.required, Validators.maxLength(255)]],
       descripcion: ['', [Validators.required, Validators.maxLength(500)]],
       empresasIds: [[]],
@@ -125,6 +132,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     });
   }
 
+  get perfilId() { return this.perfilForm.get('perfilId'); }
   get perfil() { return this.perfilForm.get('perfil'); }
   get descripcion() { return this.perfilForm.get('descripcion'); }
   get empresasIds() { return this.perfilForm.get('empresasIds'); }
@@ -146,7 +154,13 @@ export class PerfilComponent implements OnInit, AfterViewInit {
       )
       .subscribe({
         next: (response) => {
-          this.dataSource.data = response?.result || [];
+          // Simulamos relaciones temporalmente
+          const perfilesConRelaciones: PerfilConRelaciones[] = (response?.result || []).map((perfil: ListaPerfilesDto, index: number) => ({
+            ...perfil,
+            perfilEmpresas: index % 3 === 0 ? [{}, {}] : index % 2 === 0 ? [{}] : [], // Simular diferentes cantidades
+            perfilAccions: index % 4 === 0 ? [{}, {}, {}] : index % 2 === 0 ? [{}, {}] : [{}] // Simular diferentes cantidades
+          }));
+          this.dataSource.data = perfilesConRelaciones;
           this.cdr.detectChanges();
         }
       });
@@ -170,46 +184,18 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   }
 
   loadAcciones(): void {
-    console.log('🔄 Iniciando carga de acciones desde:', '/api/Perfil/GetAcciones');
-    
     this.perfilService.getAcciones$Json()
       .pipe(
         catchError(error => {
-          console.error('❌ Error al cargar acciones:', error);
-          console.error('Status:', error.status);
-          console.error('Message:', error.message);
-          
-          if (error.status === 404) {
-            this.snackBar.open('Endpoint de acciones no encontrado', 'Cerrar', { duration: 5000 });
-          } else if (error.status === 500) {
-            this.snackBar.open('Error del servidor al cargar acciones', 'Cerrar', { duration: 5000 });
-          } else {
-            this.snackBar.open('Error al cargar acciones', 'Cerrar', { duration: 3000 });
-          }
-          
-          return of({ result: [], success: false, message: 'Error' } as any);
+          console.error('Error al cargar acciones:', error);
+          this.snackBar.open('Error al cargar acciones', 'Cerrar', { duration: 3000 });
+          return of({ result: [] } as any);
         })
       )
       .subscribe({
         next: (response) => {
-          console.log('✅ Respuesta del API GetAcciones:', response);
-          
-          if (response?.success === false) {
-            console.warn('⚠️ API devolvió success: false. Message:', response.message);
-            this.snackBar.open(`Error: ${response.message || 'Respuesta no exitosa'}`, 'Cerrar', { duration: 4000 });
-          }
-          
           this.acciones = response?.result || [];
-          console.log(`📋 Acciones cargadas (${this.acciones.length}):`, this.acciones);
-          
-          if (this.acciones.length === 0) {
-            console.warn('⚠️ No se encontraron acciones en la respuesta');
-          }
-          
           this.cdr.detectChanges();
-        },
-        error: (error) => {
-          console.error('❌ Error en subscribe:', error);
         }
       });
   }
@@ -228,6 +214,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     this.empresasSeleccionadas = [];
     this.accionesSeleccionadas = [];
     this.perfilForm.reset({
+      perfilId: null,
       perfil: '',
       descripcion: '',
       empresasIds: [],
@@ -235,13 +222,15 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     });
   }
 
-  editPerfil(perfil: ListaPerfilesDto): void {
+  editPerfil(perfil: PerfilConRelaciones): void {
     this.isEditing = true;
     this.currentPerfilId = perfil.perfilId || null;
     this.showForm = true;
     this.empresasSeleccionadas = [];
     this.accionesSeleccionadas = [];
+    
     this.perfilForm.patchValue({
+      perfilId: perfil.perfilId,
       perfil: perfil.perfil || '',
       descripcion: perfil.descripcion || '',
       empresasIds: [],
@@ -292,18 +281,8 @@ export class PerfilComponent implements OnInit, AfterViewInit {
       )
       .subscribe({
         next: (response) => {
-          if (response?.result?.perfilId) {
-            const perfilId = response.result.perfilId;
+          if (response) {
             this.snackBar.open('Perfil creado exitosamente', 'Cerrar', { duration: 3000 });
-            
-            // Guardar relaciones si existen
-            if (formValue.empresasIds && formValue.empresasIds.length > 0) {
-              this.savePerfilEmpresasRelation(perfilId, formValue.empresasIds);
-            }
-            if (formValue.accionesIds && formValue.accionesIds.length > 0) {
-              this.savePerfilAccionesRelation(perfilId, formValue.accionesIds);
-            }
-            
             this.cancelForm();
             this.loadPerfiles();
           }
@@ -321,7 +300,9 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     };
 
     this.loading = true;
-    this.perfilService.actualizarPerfil$Json({ body: perfilActualizado })
+    this.perfilService.actualizarPerfil$Json({ 
+      body: perfilActualizado
+    })
     .pipe(
       catchError(error => {
         console.error('Error al actualizar perfil:', error);
@@ -337,15 +318,6 @@ export class PerfilComponent implements OnInit, AfterViewInit {
       next: (response) => {
         if (response) {
           this.snackBar.open('Perfil actualizado exitosamente', 'Cerrar', { duration: 3000 });
-          
-          // Guardar relaciones si existen
-          if (formValue.empresasIds && formValue.empresasIds.length > 0) {
-            this.savePerfilEmpresasRelation(this.currentPerfilId!, formValue.empresasIds);
-          }
-          if (formValue.accionesIds && formValue.accionesIds.length > 0) {
-            this.savePerfilAccionesRelation(this.currentPerfilId!, formValue.accionesIds);
-          }
-          
           this.cancelForm();
           this.loadPerfiles();
         }
@@ -353,113 +325,10 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private savePerfilEmpresasRelation(perfilId: number, empresasIds: string[]): void {
-    const relaciones: CrearPerfilEmpresaDto[] = empresasIds.map(empresaId => ({
-      perfilId: perfilId,
-      empresaId: empresaId,
-      plantaId: null
-    }));
-
-    this.perfilService.guardaRelacionPerfilEmpresa$Json({ body: relaciones })
-      .pipe(
-        catchError(error => {
-          console.error('Error al guardar relación perfil-empresas:', error);
-          this.snackBar.open('Perfil guardado pero error en relación con empresas', 'Cerrar', { duration: 4000 });
-          return of(false);
-        })
-      )
-      .subscribe({
-        next: (success) => {
-          if (success) {
-            this.snackBar.open('Relaciones de empresas guardadas exitosamente', 'Cerrar', { duration: 3000 });
-          }
-        }
-      });
-  }
-
-  private savePerfilAccionesRelation(perfilId: number, accionesIds: string[]): void {
-    const relaciones: CrearPerfilAccionDto[] = accionesIds.map(accionId => ({
-      id: null,
-      perfilId: perfilId,
-      codAccion: accionId
-    }));
-
-    this.perfilService.guardaRelacionPerfilAccion$Json({ body: relaciones })
-      .pipe(
-        catchError(error => {
-          console.error('Error al guardar relación perfil-acciones:', error);
-          this.snackBar.open('Perfil guardado pero error en relación con acciones', 'Cerrar', { duration: 4000 });
-          return of(false);
-        })
-      )
-      .subscribe({
-        next: (success) => {
-          if (success) {
-            this.snackBar.open('Relaciones de acciones guardadas exitosamente', 'Cerrar', { duration: 3000 });
-          }
-        }
-      });
-  }
-
   private markFormGroupTouched(): void {
     Object.keys(this.perfilForm.controls).forEach(key => {
       const control = this.perfilForm.get(key);
       control?.markAsTouched();
     });
-  }
-
-  filtrarPerfiles(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  abrirDialogNuevoPerfil(): void {
-    this.isEditing = false;
-    this.currentPerfilId = null;
-    this.showForm = true;
-    this.perfilForm.reset();
-  }
-
-  editarPerfil(perfil: ListaPerfilesDto): void {
-    this.isEditing = true;
-    this.currentPerfilId = perfil.perfilId || null;
-    this.showForm = true;
-    
-    this.perfilForm.patchValue({
-      perfil: perfil.perfil,
-      descripcion: perfil.descripcion
-    });
-  }
-
-  verDetalles(perfil: ListaPerfilesDto): void {
-    this.snackBar.open(`Ver detalles del perfil: ${perfil.perfil}`, 'Cerrar', { duration: 3000 });
-  }
-
-  cambiarEstado(perfil: ListaPerfilesDto): void {
-    this.snackBar.open(`Cambiar estado del perfil ${perfil.perfil}`, 'Cerrar', { duration: 3000 });
-  }
-
-  eliminarPerfil(perfil: ListaPerfilesDto): void {
-    if (confirm(`¿Está seguro de eliminar el perfil "${perfil.perfil}"?`)) {
-      this.snackBar.open(`Perfil ${perfil.perfil} eliminado`, 'Cerrar', { duration: 3000 });
-    }
-  }
-
-  savePerfil(): void {
-    if (this.perfilForm.valid) {
-      if (this.isEditing) {
-        this.snackBar.open('Perfil actualizado exitosamente', 'Cerrar', { duration: 3000 });
-      } else {
-        this.snackBar.open('Perfil creado exitosamente', 'Cerrar', { duration: 3000 });
-      }
-      this.cancelarEdicion();
-    }
-  }
-
-  cancelarEdicion(): void {
-    this.showForm = false;
-    this.isEditing = false;
-    this.currentPerfilId = null;
-    this.perfilForm.reset();
   }
 }

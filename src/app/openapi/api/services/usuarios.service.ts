@@ -20,6 +20,7 @@ import { CrearUsuario$Json$Params } from '../fn/usuarios/crear-usuario-json';
 import { crearUsuario$Plain } from '../fn/usuarios/crear-usuario-plain';
 import { CrearUsuario$Plain$Params } from '../fn/usuarios/crear-usuario-plain';
 import { CrearUsuarioDtoApiResponse } from '../models/crear-usuario-dto-api-response';
+import { CrearUsuarioPlantaDtoListApiResponse } from '../models/crear-usuario-planta-dto-list-api-response';
 import { eliminarCliente$Json } from '../fn/usuarios/eliminar-cliente-json';
 import { EliminarCliente$Json$Params } from '../fn/usuarios/eliminar-cliente-json';
 import { eliminarCliente$Plain } from '../fn/usuarios/eliminar-cliente-plain';
@@ -28,14 +29,24 @@ import { getAllUsers$Json } from '../fn/usuarios/get-all-users-json';
 import { GetAllUsers$Json$Params } from '../fn/usuarios/get-all-users-json';
 import { getAllUsers$Plain } from '../fn/usuarios/get-all-users-plain';
 import { GetAllUsers$Plain$Params } from '../fn/usuarios/get-all-users-plain';
+import { getPlantasByUsuario$Json } from '../fn/usuarios/get-plantas-by-usuario-json';
+import { GetPlantasByUsuario$Json$Params } from '../fn/usuarios/get-plantas-by-usuario-json';
+import { getPlantasByUsuario$Plain } from '../fn/usuarios/get-plantas-by-usuario-plain';
+import { GetPlantasByUsuario$Plain$Params } from '../fn/usuarios/get-plantas-by-usuario-plain';
 import { getUserByEmail$Json } from '../fn/usuarios/get-user-by-email-json';
 import { GetUserByEmail$Json$Params } from '../fn/usuarios/get-user-by-email-json';
 import { getUserByEmail$Plain } from '../fn/usuarios/get-user-by-email-plain';
 import { GetUserByEmail$Plain$Params } from '../fn/usuarios/get-user-by-email-plain';
+import { getUserById$Json } from '../fn/usuarios/get-user-by-id-json';
+import { GetUserById$Json$Params } from '../fn/usuarios/get-user-by-id-json';
+import { getUserById$Plain } from '../fn/usuarios/get-user-by-id-plain';
+import { GetUserById$Plain$Params } from '../fn/usuarios/get-user-by-id-plain';
+import { GetUsuarioDtoListApiResponse } from '../models/get-usuario-dto-list-api-response';
 import { guardaRelacionUsuarioPlanta$Json } from '../fn/usuarios/guarda-relacion-usuario-planta-json';
 import { GuardaRelacionUsuarioPlanta$Json$Params } from '../fn/usuarios/guarda-relacion-usuario-planta-json';
 import { guardaRelacionUsuarioPlanta$Plain } from '../fn/usuarios/guarda-relacion-usuario-planta-plain';
 import { GuardaRelacionUsuarioPlanta$Plain$Params } from '../fn/usuarios/guarda-relacion-usuario-planta-plain';
+import { ListaUsuarioPlantaListApiResponse } from '../models/lista-usuario-planta-list-api-response';
 import { UsuarioDtoListApiResponse } from '../models/usuario-dto-list-api-response';
 
 @Injectable({ providedIn: 'root' })
@@ -53,7 +64,7 @@ export class UsuariosService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllUsers$Plain$Response(params?: GetAllUsers$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<UsuarioDtoListApiResponse>> {
+  getAllUsers$Plain$Response(params?: GetAllUsers$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<ListaUsuarioPlantaListApiResponse>> {
     return getAllUsers$Plain(this.http, this.rootUrl, params, context);
   }
 
@@ -63,9 +74,9 @@ export class UsuariosService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllUsers$Plain(params?: GetAllUsers$Plain$Params, context?: HttpContext): Observable<UsuarioDtoListApiResponse> {
+  getAllUsers$Plain(params?: GetAllUsers$Plain$Params, context?: HttpContext): Observable<ListaUsuarioPlantaListApiResponse> {
     return this.getAllUsers$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<UsuarioDtoListApiResponse>): UsuarioDtoListApiResponse => r.body)
+      map((r: StrictHttpResponse<ListaUsuarioPlantaListApiResponse>): ListaUsuarioPlantaListApiResponse => r.body)
     );
   }
 
@@ -75,7 +86,7 @@ export class UsuariosService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllUsers$Json$Response(params?: GetAllUsers$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<UsuarioDtoListApiResponse>> {
+  getAllUsers$Json$Response(params?: GetAllUsers$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<ListaUsuarioPlantaListApiResponse>> {
     return getAllUsers$Json(this.http, this.rootUrl, params, context);
   }
 
@@ -85,9 +96,9 @@ export class UsuariosService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllUsers$Json(params?: GetAllUsers$Json$Params, context?: HttpContext): Observable<UsuarioDtoListApiResponse> {
+  getAllUsers$Json(params?: GetAllUsers$Json$Params, context?: HttpContext): Observable<ListaUsuarioPlantaListApiResponse> {
     return this.getAllUsers$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<UsuarioDtoListApiResponse>): UsuarioDtoListApiResponse => r.body)
+      map((r: StrictHttpResponse<ListaUsuarioPlantaListApiResponse>): ListaUsuarioPlantaListApiResponse => r.body)
     );
   }
 
@@ -135,6 +146,53 @@ export class UsuariosService extends BaseService {
   getUserByEmail$Json(params?: GetUserByEmail$Json$Params, context?: HttpContext): Observable<UsuarioDtoListApiResponse> {
     return this.getUserByEmail$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<UsuarioDtoListApiResponse>): UsuarioDtoListApiResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `getUserById()` */
+  static readonly GetUserByIdPath = '/api/Usuarios/GetUserByID';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getUserById$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserById$Plain$Response(params?: GetUserById$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<GetUsuarioDtoListApiResponse>> {
+    return getUserById$Plain(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getUserById$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserById$Plain(params?: GetUserById$Plain$Params, context?: HttpContext): Observable<GetUsuarioDtoListApiResponse> {
+    return this.getUserById$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<GetUsuarioDtoListApiResponse>): GetUsuarioDtoListApiResponse => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getUserById$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserById$Json$Response(params?: GetUserById$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<GetUsuarioDtoListApiResponse>> {
+    return getUserById$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getUserById$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserById$Json(params?: GetUserById$Json$Params, context?: HttpContext): Observable<GetUsuarioDtoListApiResponse> {
+    return this.getUserById$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<GetUsuarioDtoListApiResponse>): GetUsuarioDtoListApiResponse => r.body)
     );
   }
 
@@ -279,6 +337,53 @@ export class UsuariosService extends BaseService {
     );
   }
 
+  /** Path part for operation `getPlantasByUsuario()` */
+  static readonly GetPlantasByUsuarioPath = '/api/Usuarios/GetPlantasByUsuario';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getPlantasByUsuario$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getPlantasByUsuario$Plain$Response(params?: GetPlantasByUsuario$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<CrearUsuarioPlantaDtoListApiResponse>> {
+    return getPlantasByUsuario$Plain(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getPlantasByUsuario$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getPlantasByUsuario$Plain(params?: GetPlantasByUsuario$Plain$Params, context?: HttpContext): Observable<CrearUsuarioPlantaDtoListApiResponse> {
+    return this.getPlantasByUsuario$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CrearUsuarioPlantaDtoListApiResponse>): CrearUsuarioPlantaDtoListApiResponse => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getPlantasByUsuario$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getPlantasByUsuario$Json$Response(params?: GetPlantasByUsuario$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<CrearUsuarioPlantaDtoListApiResponse>> {
+    return getPlantasByUsuario$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getPlantasByUsuario$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getPlantasByUsuario$Json(params?: GetPlantasByUsuario$Json$Params, context?: HttpContext): Observable<CrearUsuarioPlantaDtoListApiResponse> {
+    return this.getPlantasByUsuario$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CrearUsuarioPlantaDtoListApiResponse>): CrearUsuarioPlantaDtoListApiResponse => r.body)
+    );
+  }
+
   /** Path part for operation `guardaRelacionUsuarioPlanta()` */
   static readonly GuardaRelacionUsuarioPlantaPath = '/api/Usuarios/GuardaRelacionUsuarioPlanta';
 
@@ -286,7 +391,7 @@ export class UsuariosService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `guardaRelacionUsuarioPlanta$Plain()` instead.
    *
-   * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   guardaRelacionUsuarioPlanta$Plain$Response(params?: GuardaRelacionUsuarioPlanta$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
     return guardaRelacionUsuarioPlanta$Plain(this.http, this.rootUrl, params, context);
@@ -296,7 +401,7 @@ export class UsuariosService extends BaseService {
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `guardaRelacionUsuarioPlanta$Plain$Response()` instead.
    *
-   * This method sends `application/x-www-form-urlencoded` and handles request body of type `application/x-www-form-urlencoded`.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   guardaRelacionUsuarioPlanta$Plain(params?: GuardaRelacionUsuarioPlanta$Plain$Params, context?: HttpContext): Observable<boolean> {
     return this.guardaRelacionUsuarioPlanta$Plain$Response(params, context).pipe(
@@ -308,7 +413,7 @@ export class UsuariosService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `guardaRelacionUsuarioPlanta$Json()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   guardaRelacionUsuarioPlanta$Json$Response(params?: GuardaRelacionUsuarioPlanta$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
     return guardaRelacionUsuarioPlanta$Json(this.http, this.rootUrl, params, context);
@@ -318,7 +423,7 @@ export class UsuariosService extends BaseService {
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `guardaRelacionUsuarioPlanta$Json$Response()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   guardaRelacionUsuarioPlanta$Json(params?: GuardaRelacionUsuarioPlanta$Json$Params, context?: HttpContext): Observable<boolean> {
     return this.guardaRelacionUsuarioPlanta$Json$Response(params, context).pipe(

@@ -18,10 +18,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { UsuariosService } from '../../../openapi/api/services/usuarios.service';
 import { EmpresaService } from '../../../openapi/api/services/empresa.service';
 import { 
-  UsuarioDto, 
   CrearUsuarioDto,
   ListaPlantaDto,
-  CrearUsuarioPlantaDto
+  CrearUsuarioPlantaDto,
+  ListaUsuarioPlanta
 } from '../../../openapi/api/models';
 import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -51,8 +51,8 @@ import { of } from 'rxjs';
   styleUrl: './usuario.component.css'
 })
 export class UsuarioComponent implements OnInit, AfterViewInit {
-  dataSource!: MatTableDataSource<UsuarioDto>;
-  displayedColumns: string[] = ['nombre', 'correo', 'perfil', 'activo', 'primeraVez', 'acciones'];
+  dataSource!: MatTableDataSource<ListaUsuarioPlanta>;
+  displayedColumns: string[] = ['nombre', 'correo', 'perfil', 'plantas', 'activo', 'primeraVez', 'acciones'];
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -77,7 +77,7 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
     private readonly empresaService: EmpresaService
   ) {
     this.usuarioForm = this.createForm();
-    this.dataSource = new MatTableDataSource<UsuarioDto>([]);
+    this.dataSource = new MatTableDataSource<ListaUsuarioPlanta>([]);
   }
 
   ngOnInit(): void {
@@ -86,12 +86,12 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.filterPredicate = (data: UsuarioDto, filter: string) => {
+    this.dataSource.filterPredicate = (data: ListaUsuarioPlanta, filter: string) => {
       const searchTerm = filter.toLowerCase();
       return (
         (data.nombre?.toLowerCase().includes(searchTerm) ?? false) ||
         (data.correo?.toLowerCase().includes(searchTerm) ?? false) ||
-        (data.perfil?.perfil?.toLowerCase().includes(searchTerm) ?? false)
+        (data.perfilDescripcion?.toLowerCase().includes(searchTerm) ?? false)
       );
     };
     this.setupPaginator();
@@ -110,6 +110,7 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
 
   private createForm(): FormGroup {
     return this.fb.group({
+      usuarioId: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9_-]+$/)]],
       nombre: ['', [Validators.required, Validators.maxLength(255)]],
       correo: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -119,6 +120,7 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
     });
   }
 
+  get usuarioId() { return this.usuarioForm.get('usuarioId'); }
   get nombre() { return this.usuarioForm.get('nombre'); }
   get correo() { return this.usuarioForm.get('correo'); }
   get password() { return this.usuarioForm.get('password'); }
@@ -178,6 +180,7 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
     this.showForm = true;
     this.plantasSeleccionadas = [];
     this.usuarioForm.reset({
+      usuarioId: '',
       nombre: '',
       correo: '',
       password: '',
@@ -187,19 +190,26 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
     });
   }
 
-  editUsuario(usuario: UsuarioDto): void {
+  editUsuario(usuario: ListaUsuarioPlanta): void {
     this.isEditing = true;
     this.currentUsuarioId = usuario.usuarioId || null;
     this.showForm = true;
-    this.plantasSeleccionadas = [];
+    
+    // Extraer las plantas asignadas desde listaPlantas
+    this.plantasSeleccionadas = usuario.listaPlantas || [];
+    
     this.usuarioForm.patchValue({
+      usuarioId: usuario.usuarioId || '',
       nombre: usuario.nombre || '',
       correo: usuario.correo || '',
       password: '',
       perfilId: usuario.perfilId || null,
       activo: usuario.activo ?? true,
-      plantasIds: []
+      plantasIds: this.plantasSeleccionadas
     });
+    
+    // Deshabilitar usuarioId en modo edición ya que no debería cambiar
+    this.usuarioForm.get('usuarioId')?.disable();
   }
 
   cancelForm(): void {
@@ -207,6 +217,7 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
     this.isEditing = false;
     this.currentUsuarioId = null;
     this.plantasSeleccionadas = [];
+    this.usuarioForm.get('usuarioId')?.enable();
     this.usuarioForm.reset();
   }
 
@@ -225,6 +236,7 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
 
   private createUsuario(formValue: any): void {
     const nuevoUsuario: CrearUsuarioDto = {
+      usuarioId: formValue.usuarioId,
       nombre: formValue.nombre,
       correo: formValue.correo,
       password: formValue.password,
@@ -263,6 +275,7 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
     if (!this.currentUsuarioId) return;
 
     const usuarioActualizado: CrearUsuarioDto = {
+      usuarioId: this.currentUsuarioId,
       nombre: formValue.nombre,
       correo: formValue.correo,
       password: formValue.password,

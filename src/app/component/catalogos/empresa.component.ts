@@ -132,7 +132,7 @@ export class EmpresaComponent implements OnInit, AfterViewInit {
 
   private createForm(): FormGroup {
     return this.fb.group({
-      empresaId: ['', [Validators.required, Validators.maxLength(50)]],
+      empresaId: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^[A-Za-z0-9_-]+$/)]],
       razonSocial: ['', [Validators.required, Validators.maxLength(255)]],
       rfc: ['', [Validators.required]],
       rfcRepresentanteLegal: ['', [Validators.required]],
@@ -230,6 +230,7 @@ export class EmpresaComponent implements OnInit, AfterViewInit {
     this.currentEmpresaId = null;
     this.empresaForm.reset();
     this.empresaForm.patchValue({ 
+      empresaId: '', // Limpiar explícitamente el empresaId para nueva empresa
       activa: true,
       plantasIds: [],
       proveedoresIds: []
@@ -266,6 +267,11 @@ export class EmpresaComponent implements OnInit, AfterViewInit {
         versionCtrVol: this.empresaForm.value.versionCtrVol,
         fechaCreacion: this.isEditing ? undefined : new Date().toISOString()
       };
+      
+      // Log para debuggear
+      console.log('Datos del formulario a enviar:', formData);
+      console.log('Es edición:', this.isEditing);
+      console.log('EmpresaId del formulario:', this.empresaForm.value.empresaId);
       
       this.loading = true;
       
@@ -350,9 +356,19 @@ export class EmpresaComponent implements OnInit, AfterViewInit {
 
   cancelForm(): void {
     this.showForm = false;
-    this.empresaForm.reset();
     this.isEditing = false;
     this.currentEmpresaId = null;
+    
+    // Reset completo del formulario
+    this.empresaForm.reset();
+    
+    // Restablecer valores por defecto
+    this.empresaForm.patchValue({
+      empresaId: '',
+      activa: true,
+      plantasIds: [],
+      proveedoresIds: []
+    });
   }
 
   private showSnackBar(message: string, type: 'success' | 'error'): void {

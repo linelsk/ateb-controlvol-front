@@ -25,7 +25,7 @@ import { DocumentoMedicionTanque } from '../models/documento-medicion-tanque';
 import { DocumentoProducto } from '../models/documento-producto';
 import { DocumentoTanque } from '../models/documento-tanque';
 import { DocumentoTanqueExistencium } from '../models/documento-tanque-existencium';
-import { Empresa } from '../models/empresa';
+import { EmpresaPlantum } from '../models/empresa-plantum';
 import { EmpresaProducto } from '../models/empresa-producto';
 import { EntregaDiario } from '../models/entrega-diario';
 import { EntregasMensuale } from '../models/entregas-mensuale';
@@ -37,6 +37,7 @@ import { RecepcionDiario } from '../models/recepcion-diario';
 import { RecepcionesMensuale } from '../models/recepciones-mensuale';
 import { Tanque } from '../models/tanque';
 import { TClavePermiso } from '../models/t-clave-permiso';
+import { UsuarioPlantum } from '../models/usuario-plantum';
 export interface Plantum {
   activa?: boolean | null;
   bitacoras?: Array<Bitacora> | null;
@@ -64,8 +65,8 @@ export interface Plantum {
   documentoTanqueExistencia?: Array<DocumentoTanqueExistencium> | null;
   documentoTanques?: Array<DocumentoTanque> | null;
   documentos?: Array<Documento> | null;
+  empresaPlanta?: Array<EmpresaPlantum> | null;
   empresaProductos?: Array<EmpresaProducto> | null;
-  empresas?: Array<Empresa> | null;
   entregaDiarios?: Array<EntregaDiario> | null;
   entregasMensuales?: Array<EntregasMensuale> | null;
   idModalidadPermiso?: number | null;
@@ -88,4 +89,5 @@ export interface Plantum {
   recepcionDiarios?: Array<RecepcionDiario> | null;
   recepcionesMensuales?: Array<RecepcionesMensuale> | null;
   tanques?: Array<Tanque> | null;
+  usuarioPlanta?: Array<UsuarioPlantum> | null;
 }

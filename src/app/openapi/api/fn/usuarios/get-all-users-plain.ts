@@ -8,12 +8,12 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { UsuarioDtoListApiResponse } from '../../models/usuario-dto-list-api-response';
+import { ListaUsuarioPlantaListApiResponse } from '../../models/lista-usuario-planta-list-api-response';
 
 export interface GetAllUsers$Plain$Params {
 }
 
-export function getAllUsers$Plain(http: HttpClient, rootUrl: string, params?: GetAllUsers$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<UsuarioDtoListApiResponse>> {
+export function getAllUsers$Plain(http: HttpClient, rootUrl: string, params?: GetAllUsers$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<ListaUsuarioPlantaListApiResponse>> {
   const rb = new RequestBuilder(rootUrl, getAllUsers$Plain.PATH, 'get');
   if (params) {
   }
@@ -23,7 +23,7 @@ export function getAllUsers$Plain(http: HttpClient, rootUrl: string, params?: Ge
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<UsuarioDtoListApiResponse>;
+      return r as StrictHttpResponse<ListaUsuarioPlantaListApiResponse>;
     })
   );
 }

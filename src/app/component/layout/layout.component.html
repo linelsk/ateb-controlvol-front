@@ -6,33 +6,88 @@
 		</div>
 		<nav class="menu-list">
 			@if (role === 'Administrador') {
-				<a class="menu-item" routerLink="/admin">
-					<span class="menu-icon">🏠</span>
+				<!-- Dashboard -->
+				<a class="menu-item" routerLink="/admin" routerLinkActive="active">
+					<span class="menu-icon">
+						<mat-icon>dashboard</mat-icon>
+					</span>
 					<span class="menu-text">Dashboard</span>
 				</a>
-				<a class="menu-item" routerLink="/usuarios">
-					<span class="menu-icon">👥</span>
-					<span class="menu-text">Usuarios</span>
-				</a>
-				<a class="menu-item" routerLink="/empresa">
-					<span class="menu-icon">🏢</span>
-					<span class="menu-text">Empresas</span>
-				</a>
-				<a class="menu-item" routerLink="/perfil">
-					<span class="menu-icon">🔐</span>
-					<span class="menu-text">Perfiles</span>
-				</a>
+
+				<!-- Catálogos -->
+				<div class="menu-section">
+					<button class="menu-item submenu-header" (click)="toggleCatalogos()">
+						<span class="menu-icon">
+							<mat-icon>inventory_2</mat-icon>
+						</span>
+						<span class="menu-text">Catálogos</span>
+						<span class="expand-icon">
+							<mat-icon>{{ catalogosExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+						</span>
+					</button>
+					
+					@if (catalogosExpanded) {
+						<div class="submenu">
+							<a class="submenu-item" routerLink="/empresa" routerLinkActive="active">
+								<span class="submenu-icon">
+									<mat-icon>business</mat-icon>
+								</span>
+								<span class="submenu-text">Empresas</span>
+							</a>
+						</div>
+					}
+				</div>
+
+				<!-- Administración -->
+				<div class="menu-section">
+					<button class="menu-item submenu-header" (click)="toggleAdministracion()">
+						<span class="menu-icon">
+							<mat-icon>admin_panel_settings</mat-icon>
+						</span>
+						<span class="menu-text">Administración</span>
+						<span class="expand-icon">
+							<mat-icon>{{ administracionExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+						</span>
+					</button>
+					
+					@if (administracionExpanded) {
+						<div class="submenu">
+							<a class="submenu-item" routerLink="/usuarios" routerLinkActive="active">
+								<span class="submenu-icon">
+									<mat-icon>people</mat-icon>
+								</span>
+								<span class="submenu-text">Usuarios</span>
+							</a>
+							<a class="submenu-item" routerLink="/perfil" routerLinkActive="active">
+								<span class="submenu-icon">
+									<mat-icon>account_circle</mat-icon>
+								</span>
+								<span class="submenu-text">Perfiles</span>
+							</a>
+						</div>
+					}
+				</div>
+
 			} @else {
-				<a class="menu-item" routerLink="/home">
-					<span class="menu-icon">🏠</span>
+				<!-- Cliente Menu -->
+				<a class="menu-item" routerLink="/home" routerLinkActive="active">
+					<span class="menu-icon">
+						<mat-icon>home</mat-icon>
+					</span>
 					<span class="menu-text">Inicio</span>
 				</a>
 			}
-			<!-- Botón de logout visualmente igual a los links -->
-			<a class="menu-item logout-btn" href="#" (click)="logout(); $event.preventDefault()">
-				<span class="menu-icon">🚪</span>
+
+			<!-- Separador -->
+			<div class="menu-separator"></div>
+
+			<!-- Cerrar sesión -->
+			<button class="menu-item logout-btn" (click)="logout()">
+				<span class="menu-icon">
+					<mat-icon>logout</mat-icon>
+				</span>
 				<span class="menu-text">Cerrar sesión</span>
-			</a>
+			</button>
 		</nav>
 	</aside>
 	<main class="main-content">

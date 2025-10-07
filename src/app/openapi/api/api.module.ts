@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AuthService } from './services/auth.service';
+import { EmpresaService } from './services/empresa.service';
+import { PerfilService } from './services/perfil.service';
 import { UsuariosService } from './services/usuarios.service';
 import { WeatherForecastService } from './services/weather-forecast.service';
 
@@ -19,6 +21,8 @@ import { WeatherForecastService } from './services/weather-forecast.service';
   declarations: [],
   providers: [
     AuthService,
+    EmpresaService,
+    PerfilService,
     UsuariosService,
     WeatherForecastService,
     ApiConfiguration

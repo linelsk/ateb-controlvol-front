@@ -33,35 +33,42 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // Redirección automática si ya hay token válido
     if (this.auth.isAuthenticated()) {
-      const role = this.auth.getRole();
-      if (role === 'Administrador') {
-        this.router.navigate(['/admin']);
-      } else if (role === 'Cliente') {
-        this.router.navigate(['/clientes']);
-      }
+      // Todos los usuarios autenticados van a /home
+      this.router.navigate(['/home']);
     }
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       const { correo, password } = this.loginForm.value;
+      
+      console.log('Intentando login con:', correo);
+      
       this.auth.login(correo, password).subscribe({
         next: (isAuthenticated) => {
-          this.onLoginSuccess(isAuthenticated);
+          console.log('Respuesta de login:', isAuthenticated);
+          if (isAuthenticated) {
+            this.handleSuccessfulLogin();
+          } else {
+            this.handleLoginError('Correo o contraseña incorrectos');
+          }
         },
         error: (error) => {
+          console.error('Error en login:', error);
           this.onLoginError(error);
         }
       });
+    } else {
+      console.log('Formulario inválido');
+      this.markFormGroupTouched();
     }
   }
 
-  private onLoginSuccess(isAuthenticated: boolean) {
-    if (isAuthenticated) {
-      this.handleSuccessfulLogin();
-      return;
-    }
-    this.handleLoginError('Correo o contraseña incorrectos');
+  private markFormGroupTouched() {
+    Object.keys(this.loginForm.controls).forEach(key => {
+      const control = this.loginForm.get(key);
+      control?.markAsTouched();
+    });
   }
 
   private onLoginError(error: any) {
@@ -76,29 +83,33 @@ export class LoginComponent implements OnInit {
   }
 
   private handleSuccessfulLogin() {
-    // Verificar si es primera vez del usuario
-    if (this.auth.isFirstLogin()) {
-      this.router.navigate(['/home']);
-      return;
-    }
-    
-    // Redirigir según el rol del usuario
+    // Obtener información del usuario después del login exitoso
     const role = this.auth.getRole();
-    switch (role) {
-      case 'Administrador':
-        this.router.navigate(['/admin']);
-        break;
-      case 'Supervisor':
-        this.router.navigate(['/supervisor']);
-        break;
-      case 'Cliente':
-        this.router.navigate(['/clientes']);
-        break;
-      case 'Usuario':
-      default:
-        this.router.navigate(['/dashboard']);
-        break;
-    }
+    const user = this.auth.getCurrentUser();
+    
+    console.log('=== LOGIN EXITOSO ===');
+    console.log('Usuario completo:', user);
+    console.log('Rol detectado:', role);
+    console.log('Token presente:', !!this.auth.getToken());
+    console.log('IsAuthenticated:', this.auth.isAuthenticated());
+    
+    // Todos los usuarios van a /home después del login
+    const targetRoute = '/home';
+    
+    console.log('Redirigiendo a:', targetRoute);
+    
+    // Navegación directa e inmediata
+    this.router.navigateByUrl(targetRoute).then(navigationResult => {
+      console.log(`Resultado de navegación a ${targetRoute}:`, navigationResult);
+      if (!navigationResult) {
+        console.error('Navegación falló, intentando con navigate()');
+        this.router.navigate([targetRoute]);
+      }
+    }).catch(error => {
+      console.error('Error en navegación con navigateByUrl:', error);
+      // Fallback con navigate
+      this.router.navigate([targetRoute]);
+    });
   }
 
   private handleLoginError(message: string) {

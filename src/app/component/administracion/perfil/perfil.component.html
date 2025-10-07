@@ -5,11 +5,13 @@
   <div class="content-section">
     <mat-card class="card-gradient">
       <mat-card-header>
-        <div mat-card-avatar>
+        <mat-card-title class="card-title-with-icon">
           <mat-icon>admin_panel_settings</mat-icon>
-        </div>
-        <mat-card-title>🔐 Catálogo de Perfiles</mat-card-title>
-        <mat-card-subtitle>Administración y gestión de perfiles de usuario del sistema</mat-card-subtitle>
+          Catálogo de Perfiles
+        </mat-card-title>
+        <mat-card-subtitle>
+          Administración y gestión de perfiles de usuario del sistema
+        </mat-card-subtitle>
       </mat-card-header>
     </mat-card>
   </div>
@@ -32,7 +34,7 @@
         <!-- Botón Nuevo Perfil -->
         <button mat-raised-button 
                 color="primary" 
-                (click)="abrirDialogNuevoPerfil()"
+                (click)="showNewForm()"
                 class="action-button">
           <mat-icon>add</mat-icon>
           Nuevo Perfil
@@ -51,163 +53,204 @@
     } @else {
       @if (showForm) {
         <!-- Formulario de creación/edición -->
-        <mat-card class="card-standard">
+        <div class="content-section">
+        <mat-card class="card-accent">
           <mat-card-header>
             <mat-card-title>
-              @if (isEditing) {
-                <mat-icon>edit</mat-icon>
-                Editar Perfil
-              } @else {
-                <mat-icon>add</mat-icon>
-                Nuevo Perfil
-              }
+              {{ isEditing ? 'Editar Perfil' : 'Nuevo Perfil' }}
             </mat-card-title>
           </mat-card-header>
           
           <mat-card-content>
-            <form [formGroup]="perfilForm" (ngSubmit)="savePerfil()">
+            <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
               <div class="form-row">
-                <mat-form-field appearance="outline" class="form-field">
+                <mat-form-field appearance="outline" class="field-half">
                   <mat-label>Nombre del Perfil</mat-label>
                   <input matInput 
                          formControlName="perfil"
-                         placeholder="Ej: Administrador, Cliente, Supervisor">
-                  @if (perfilForm.get('perfil')?.hasError('required') && perfilForm.get('perfil')?.touched) {
-                    <mat-error>El nombre del perfil es requerido</mat-error>
+                         placeholder="Ej: Administrador, Cliente, Supervisor"
+                         autocomplete="off">
+                  @if (perfil?.hasError('required')) {
+                    <mat-error>
+                      El nombre del perfil es requerido
+                    </mat-error>
+                  }
+                  @if (perfil?.hasError('maxlength')) {
+                    <mat-error>
+                      El nombre no puede exceder 255 caracteres
+                    </mat-error>
                   }
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" class="form-field">
+                <mat-form-field appearance="outline" class="field-half">
                   <mat-label>Descripción</mat-label>
                   <textarea matInput 
                            formControlName="descripcion"
                            placeholder="Descripción del perfil"
-                           rows="3"></textarea>
+                           rows="3"
+                           autocomplete="off"></textarea>
+                  @if (descripcion?.hasError('required')) {
+                    <mat-error>
+                      La descripción es requerida
+                    </mat-error>
+                  }
+                  @if (descripcion?.hasError('maxlength')) {
+                    <mat-error>
+                      La descripción no puede exceder 500 caracteres
+                    </mat-error>
+                  }
                 </mat-form-field>
               </div>
 
-              <div class="form-actions">
-                <button type="button" 
-                        mat-stroked-button 
-                        (click)="cancelarEdicion()"
-                        class="cancel-button">
-                  <mat-icon>cancel</mat-icon>
-                  Cancelar
-                </button>
-                
-                <button type="submit" 
-                        mat-raised-button 
-                        color="primary"
-                        [disabled]="perfilForm.invalid || loading"
-                        class="save-button">
-                  <mat-icon>save</mat-icon>
-                  @if (isEditing) {
-                    Actualizar
-                  } @else {
-                    Guardar
-                  }
-                </button>
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="field-half">
+                  <mat-label>Empresas Asignadas</mat-label>
+                  <mat-select formControlName="empresasIds" multiple>
+                    @for (empresa of empresas; track empresa.empresaId) {
+                      <mat-option [value]="empresa.empresaId">
+                        {{ empresa.razonSocial }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                  <mat-hint>Seleccione una o más empresas para el perfil</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="field-half">
+                  <mat-label>Acciones Asignadas</mat-label>
+                  <mat-select formControlName="accionesIds" multiple>
+                    @for (accion of acciones; track accion.codAccion) {
+                      <mat-option [value]="accion.codAccion">
+                        {{ accion.descripcion }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                  <mat-hint>Seleccione una o más acciones para el perfil</mat-hint>
+                </mat-form-field>
               </div>
             </form>
           </mat-card-content>
+
+          <mat-card-actions class="form-actions">
+            <button mat-button 
+                    type="button" 
+                    (click)="cancelForm()"
+                    class="btn-cancel">
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+            
+            <button mat-raised-button 
+                    color="primary"
+                    (click)="onSubmit()"
+                    [disabled]="perfilForm.invalid"
+                    class="btn-primary">
+              <mat-icon>{{ isEditing ? 'save' : 'add' }}</mat-icon>
+              {{ isEditing ? 'Actualizar' : 'Crear' }} Perfil
+            </button>
+          </mat-card-actions>
         </mat-card>
-      } @else {
-        <!-- Tabla de perfiles -->
-        <mat-card class="card-standard">
-          @if (dataSource.data.length > 0) {
-            <div class="table-container">
-              <table mat-table [dataSource]="dataSource" class="data-table" matSort>
-                
-                <!-- Columna ID -->
-                <ng-container matColumnDef="perfilId">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="id-column">ID</th>
-                  <td mat-cell *matCellDef="let perfil" class="id-column">{{ perfil.perfilId }}</td>
-                </ng-container>
-
-                <!-- Columna Perfil -->
-                <ng-container matColumnDef="perfil">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Perfil</th>
-                  <td mat-cell *matCellDef="let perfil">
-                    <div class="user-info">
-                      <span class="user-name">{{ perfil.perfil }}</span>
-                    </div>
-                  </td>
-                </ng-container>
-
-                <!-- Columna Descripción -->
-                <ng-container matColumnDef="descripcion">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
-                  <td mat-cell *matCellDef="let perfil">
-                    <span class="description-text">{{ perfil.descripcion || 'Sin descripción' }}</span>
-                  </td>
-                </ng-container>
-
-                <!-- Columna Acciones -->
-                <ng-container matColumnDef="acciones">
-                  <th mat-header-cell *matHeaderCellDef class="actions-column">Acciones</th>
-                  <td mat-cell *matCellDef="let perfil" class="actions-column">
-                    <button mat-icon-button 
-                            [matMenuTriggerFor]="menuAcciones" 
-                            color="primary"
-                            matTooltip="Más opciones">
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                    
-                    <mat-menu #menuAcciones="matMenu">
-                      <button mat-menu-item (click)="editarPerfil(perfil)">
-                        <mat-icon>edit</mat-icon>
-                        <span>Editar</span>
-                      </button>
-                      
-                      <button mat-menu-item (click)="verDetalles(perfil)">
-                        <mat-icon>visibility</mat-icon>
-                        <span>Ver detalles</span>
-                      </button>
-                      
-                      <mat-divider></mat-divider>
-                      
-                      <button mat-menu-item 
-                              (click)="eliminarPerfil(perfil)"
-                              class="delete-action">
-                        <mat-icon>delete</mat-icon>
-                        <span>Eliminar</span>
-                      </button>
-                    </mat-menu>
-                  </td>
-                </ng-container>
-
-                <!-- Filas de la tabla -->
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
-                    class="table-row"></tr>
-              </table>
-
-              <!-- Paginador -->
-              <mat-paginator #paginator
-                           [length]="dataSource.data.length"
-                           [pageSize]="pageSize"
-                           [pageSizeOptions]="pageSizeOptions"
-                           showFirstLastButtons
-                           class="paginator">
-              </mat-paginator>
-            </div>
-          } @else {
-            <!-- Estado vacío -->
-            <div class="empty-state">
-              <mat-icon class="empty-icon">admin_panel_settings</mat-icon>
-              <h3>No hay perfiles registrados</h3>
-              <p>Comienza creando el primer perfil del sistema para asignar roles y permisos a los usuarios.</p>
-              <button mat-raised-button 
-                      color="primary" 
-                      (click)="abrirDialogNuevoPerfil()"
-                      class="empty-action-button">
-                <mat-icon>add</mat-icon>
-                Crear Primer Perfil
-              </button>
-            </div>
-          }
-        </mat-card>
+      </div>
       }
+        <!-- Tabla de perfiles -->
+        <div class="content-section">
+        <mat-card class="card-standard">
+          <mat-card-header>
+            <mat-card-title>Lista de Perfiles</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="table-container">
+              @if (loading) {
+                <div class="loading-state">
+                  <mat-icon class="loading-icon">refresh</mat-icon>
+                  <h3>Cargando perfiles...</h3>
+                  <p>Por favor espere mientras se cargan los datos</p>
+                </div>
+              } @else if (dataSource.data.length === 0) {
+                <div class="empty-state">
+                  <mat-icon>admin_panel_settings</mat-icon>
+                  <h3>No hay perfiles registrados</h3>
+                  <p>Comienza agregando el primer perfil al sistema</p>
+                </div>
+              } @else {
+                <div>
+                  <table mat-table [dataSource]="dataSource" class="data-table" matSort>
+                    
+                    <!-- Columna Perfil -->
+                    <ng-container matColumnDef="perfil">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Perfil</th>
+                      <td mat-cell *matCellDef="let perfil">
+                        <div class="info-group">
+                          <span class="info-primary">{{ perfil.perfil }}</span>
+                          <span class="info-secondary">ID: {{ perfil.perfilId }}</span>
+                        </div>
+                      </td>
+                    </ng-container>
+
+                    <!-- Columna Descripción -->
+                    <ng-container matColumnDef="descripcion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+                      <td mat-cell *matCellDef="let perfil">
+                        <span class="info-primary">{{ perfil.descripcion || 'Sin descripción' }}</span>
+                      </td>
+                    </ng-container>
+
+                    <!-- Columna Empresas -->
+                    <ng-container matColumnDef="empresas">
+                      <th mat-header-cell *matHeaderCellDef>Empresas</th>
+                      <td mat-cell *matCellDef="let perfil">
+                        @if (!perfil.perfilEmpresas || perfil.perfilEmpresas.length === 0) {
+                          <span class="info-secondary">Sin empresas</span>
+                        } @else {
+                          <span class="info-primary">{{ perfil.perfilEmpresas.length }} empresa(s)</span>
+                        }
+                      </td>
+                    </ng-container>
+
+                    <!-- Columna Acciones Asignadas -->
+                    <ng-container matColumnDef="acciones">
+                      <th mat-header-cell *matHeaderCellDef>Acciones Asignadas</th>
+                      <td mat-cell *matCellDef="let perfil">
+                        @if (!perfil.perfilAccions || perfil.perfilAccions.length === 0) {
+                          <span class="info-secondary">Sin acciones</span>
+                        } @else {
+                          <span class="info-primary">{{ perfil.perfilAccions.length }} acción(es)</span>
+                        }
+                      </td>
+                    </ng-container>
+
+                    <!-- Columna Acciones de Tabla -->
+                    <ng-container matColumnDef="acciones_btn">
+                      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                      <td mat-cell *matCellDef="let perfil">
+                        <div class="actions-container">
+                          <button mat-icon-button 
+                                  color="primary"
+                                  (click)="editPerfil(perfil)"
+                                  matTooltip="Editar perfil">
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                        </div>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+                        class="usuario-row"></tr>
+                  </table>
+
+                  <!-- Paginador -->
+                  <mat-paginator 
+                    [pageSizeOptions]="pageSizeOptions"
+                    [pageSize]="pageSize"
+                    showFirstLastButtons>
+                  </mat-paginator>
+                </div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
     }
   </div>
 </div>

@@ -12,14 +12,9 @@ export const routes: Routes = [
 		canActivate: [authGuard(['Administrador', 'Cliente'])],
 		children: [
 			{
-				path: 'admin',
-				loadComponent: () => import('./component/home/home.component').then(m => m.HomeComponent),
-				canActivate: [authGuard(['Administrador'])]
-			},
-			{
 				path: 'home',
 				loadComponent: () => import('./component/home/home.component').then(m => m.HomeComponent),
-				canActivate: [authGuard(['Cliente'])]
+				canActivate: [authGuard(['Administrador', 'Cliente'])]
 			},
 			{
 				path: 'usuarios',
