@@ -4,6 +4,8 @@
 
 export interface ListaPerfilesDto {
   descripcion?: string | null;
+  listaAcciones?: Array<string> | null;
+  listaEmpresas?: Array<string> | null;
   perfil?: string | null;
   perfilId?: number;
 }

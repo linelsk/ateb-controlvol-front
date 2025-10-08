@@ -199,10 +199,10 @@
                     <ng-container matColumnDef="empresas">
                       <th mat-header-cell *matHeaderCellDef>Empresas</th>
                       <td mat-cell *matCellDef="let perfil">
-                        @if (!perfil.perfilEmpresas || perfil.perfilEmpresas.length === 0) {
+                        @if (!perfil.listaEmpresas || perfil.listaEmpresas.length === 0) {
                           <span class="info-secondary">Sin empresas</span>
                         } @else {
-                          <span class="info-primary">{{ perfil.perfilEmpresas.length }} empresa(s)</span>
+                          <span class="info-primary">{{ perfil.listaEmpresas.length }} empresa(s)</span>
                         }
                       </td>
                     </ng-container>
@@ -211,10 +211,10 @@
                     <ng-container matColumnDef="acciones">
                       <th mat-header-cell *matHeaderCellDef>Acciones Asignadas</th>
                       <td mat-cell *matCellDef="let perfil">
-                        @if (!perfil.perfilAccions || perfil.perfilAccions.length === 0) {
+                        @if (!perfil.listaAcciones || perfil.listaAcciones.length === 0) {
                           <span class="info-secondary">Sin acciones</span>
                         } @else {
-                          <span class="info-primary">{{ perfil.perfilAccions.length }} acción(es)</span>
+                          <span class="info-primary">{{ perfil.listaAcciones.length }} acción(es)</span>
                         }
                       </td>
                     </ng-container>

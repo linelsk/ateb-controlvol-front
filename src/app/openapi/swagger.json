@@ -1057,6 +1057,55 @@
         }
       }
     },
+    "/api/Usuarios/ActualizarPassword": {
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "ActualizarPassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearUsuarioDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearUsuarioDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Usuarios/EliminarCliente": {
       "delete": {
         "tags": [
@@ -3776,6 +3825,20 @@
           },
           "descripcion": {
             "type": "string",
+            "nullable": true
+          },
+          "listaEmpresas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "listaAcciones": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           }
         },

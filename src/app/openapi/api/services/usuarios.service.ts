@@ -11,6 +11,10 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { actualizarPassword$Json } from '../fn/usuarios/actualizar-password-json';
+import { ActualizarPassword$Json$Params } from '../fn/usuarios/actualizar-password-json';
+import { actualizarPassword$Plain } from '../fn/usuarios/actualizar-password-plain';
+import { ActualizarPassword$Plain$Params } from '../fn/usuarios/actualizar-password-plain';
 import { actualizarUsuario$Json } from '../fn/usuarios/actualizar-usuario-json';
 import { ActualizarUsuario$Json$Params } from '../fn/usuarios/actualizar-usuario-json';
 import { actualizarUsuario$Plain } from '../fn/usuarios/actualizar-usuario-plain';
@@ -286,6 +290,53 @@ export class UsuariosService extends BaseService {
    */
   actualizarUsuario$Json(params?: ActualizarUsuario$Json$Params, context?: HttpContext): Observable<CrearUsuarioDtoApiResponse> {
     return this.actualizarUsuario$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CrearUsuarioDtoApiResponse>): CrearUsuarioDtoApiResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `actualizarPassword()` */
+  static readonly ActualizarPasswordPath = '/api/Usuarios/ActualizarPassword';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `actualizarPassword$Plain()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  actualizarPassword$Plain$Response(params?: ActualizarPassword$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<CrearUsuarioDtoApiResponse>> {
+    return actualizarPassword$Plain(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `actualizarPassword$Plain$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  actualizarPassword$Plain(params?: ActualizarPassword$Plain$Params, context?: HttpContext): Observable<CrearUsuarioDtoApiResponse> {
+    return this.actualizarPassword$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CrearUsuarioDtoApiResponse>): CrearUsuarioDtoApiResponse => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `actualizarPassword$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  actualizarPassword$Json$Response(params?: ActualizarPassword$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<CrearUsuarioDtoApiResponse>> {
+    return actualizarPassword$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `actualizarPassword$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  actualizarPassword$Json(params?: ActualizarPassword$Json$Params, context?: HttpContext): Observable<CrearUsuarioDtoApiResponse> {
+    return this.actualizarPassword$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<CrearUsuarioDtoApiResponse>): CrearUsuarioDtoApiResponse => r.body)
     );
   }

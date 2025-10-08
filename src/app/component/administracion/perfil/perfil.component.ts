@@ -30,12 +30,6 @@ import {
 import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-// Interfaz extendida para simular relaciones hasta que se actualice el backend
-interface PerfilConRelaciones extends ListaPerfilesDto {
-  perfilEmpresas?: any[];
-  perfilAccions?: any[];
-}
-
 @Component({
   selector: 'app-perfil',
   standalone: true,
@@ -63,7 +57,7 @@ interface PerfilConRelaciones extends ListaPerfilesDto {
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent implements OnInit, AfterViewInit {
-  dataSource!: MatTableDataSource<PerfilConRelaciones>;
+  dataSource!: MatTableDataSource<ListaPerfilesDto>;
   displayedColumns: string[] = ['perfil', 'descripcion', 'empresas', 'acciones', 'acciones_btn'];
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -78,9 +72,9 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageSize: number = 10;
   empresas: ListaEmpresasDto[] = [];
-  empresasSeleccionadas: string[] = [];
+  empresasSeleccionadas: ListaEmpresasDto[] = [];
   acciones: ListaAccionDto[] = [];
-  accionesSeleccionadas: string[] = [];
+  accionesSeleccionadas: ListaAccionDto[] = [];
 
   constructor(
     private readonly fb: FormBuilder,
@@ -91,7 +85,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     private readonly empresaService: EmpresaService
   ) {
     this.perfilForm = this.createForm();
-    this.dataSource = new MatTableDataSource<PerfilConRelaciones>([]);
+    this.dataSource = new MatTableDataSource<ListaPerfilesDto>([]);
   }
 
   ngOnInit(): void {
@@ -101,7 +95,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.filterPredicate = (data: PerfilConRelaciones, filter: string) => {
+    this.dataSource.filterPredicate = (data: ListaPerfilesDto, filter: string) => {
       const searchTerm = filter.toLowerCase();
       return (
         (data.perfil?.toLowerCase().includes(searchTerm) ?? false) ||
@@ -154,13 +148,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
       )
       .subscribe({
         next: (response) => {
-          // Simulamos relaciones temporalmente
-          const perfilesConRelaciones: PerfilConRelaciones[] = (response?.result || []).map((perfil: ListaPerfilesDto, index: number) => ({
-            ...perfil,
-            perfilEmpresas: index % 3 === 0 ? [{}, {}] : index % 2 === 0 ? [{}] : [], // Simular diferentes cantidades
-            perfilAccions: index % 4 === 0 ? [{}, {}, {}] : index % 2 === 0 ? [{}, {}] : [{}] // Simular diferentes cantidades
-          }));
-          this.dataSource.data = perfilesConRelaciones;
+          this.dataSource.data = response?.result || [];
           this.cdr.detectChanges();
         }
       });
@@ -222,19 +210,25 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     });
   }
 
-  editPerfil(perfil: PerfilConRelaciones): void {
+  editPerfil(perfil: ListaPerfilesDto): void {
     this.isEditing = true;
     this.currentPerfilId = perfil.perfilId || null;
     this.showForm = true;
-    this.empresasSeleccionadas = [];
-    this.accionesSeleccionadas = [];
+    
+    // Usar las nuevas listas del modelo actualizado
+    // listaEmpresas y listaAcciones contienen arrays de strings (IDs)
+    this.empresasSeleccionadas = perfil.listaEmpresas ? 
+      this.empresas.filter(empresa => perfil.listaEmpresas!.includes(empresa.empresaId || '')) : [];
+    
+    this.accionesSeleccionadas = perfil.listaAcciones ?
+      this.acciones.filter(accion => perfil.listaAcciones!.includes(accion.codAccion || '')) : [];
     
     this.perfilForm.patchValue({
       perfilId: perfil.perfilId,
       perfil: perfil.perfil || '',
       descripcion: perfil.descripcion || '',
-      empresasIds: [],
-      accionesIds: []
+      empresasIds: perfil.listaEmpresas || [],
+      accionesIds: perfil.listaAcciones || []
     });
   }
 
